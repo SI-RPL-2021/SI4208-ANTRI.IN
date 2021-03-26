@@ -1,7 +1,7 @@
 <?php
  function del_data($key_item){
     global $conn;
-    // query("DELETE FROM `cart` WHERE `cart`.`id` = '$key_item'");
+    query("DELETE FROM `cart` WHERE `cart`.`id` = '$key_item'");
     $eff_rw = mysqli_affected_rows($conn);
     
     return $eff_rw;
@@ -24,7 +24,7 @@
 
 function edit_data($key_item){
     global $conn;
-    // $rs_row = query("SELECT * FROM `user` WHERE `id` = '$key_item'")[0];
+    $rs_row = query("SELECT * FROM `user` WHERE `id` = '$key_item'")[0];
 
     $id_num = $key_item;
     $nama = $_POST['prof_nama'];
