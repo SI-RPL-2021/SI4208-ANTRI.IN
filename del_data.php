@@ -1,7 +1,7 @@
 <?php
  function del_data($key_item){
     global $conn;
-    // query("DELETE FROM `cart` WHERE `cart`.`id` = '$key_item'");
+    query("DELETE FROM `cart` WHERE `cart`.`id` = '$key_item'");
     $eff_rw = mysqli_affected_rows($conn);
     
     return $eff_rw;
