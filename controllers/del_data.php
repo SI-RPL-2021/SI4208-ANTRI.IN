@@ -4,7 +4,7 @@ require 'select_data.php';
 
 function del_data_dokter($key_item){
     global $conn;
-    view_data("DELETE FROM `List Dokter` WHERE `List Dokter`.`id_dokter` = '$key_item'");
+    view_data("DELETE FROM `list_dokter` WHERE `list_dokter`.`id_dokter` = '$key_item'");
     $eff_rw = mysqli_affected_rows($conn);
     
     return $eff_rw;
@@ -40,3 +40,5 @@ function del_data_apotek($key_item){
     
     return $eff_rw;
 }
+
+?>
