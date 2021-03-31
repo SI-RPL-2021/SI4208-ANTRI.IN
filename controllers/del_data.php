@@ -24,3 +24,19 @@ function del_data_dokter($key_item){
     // ";
     // }
 }
+
+function del_data_hospital($key_item){
+    global $conn;
+    view_data("DELETE FROM `Poliklinik` WHERE `Poliklinik`.`id_poli` = '$key_item'");
+    $eff_rw = mysqli_affected_rows($conn);
+    
+    return $eff_rw;
+}
+
+function del_data_apotek($key_item){
+    global $conn;
+    view_data("DELETE FROM `Apotek` WHERE `Apotek`.`id_apotek` = '$key_item'");
+    $eff_rw = mysqli_affected_rows($conn);
+    
+    return $eff_rw;
+}
