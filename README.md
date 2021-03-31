@@ -2,5 +2,5 @@
 
 # Hi, Selamat Datang bagi Kalian semua :wave:
 
-Repository ini berisi web yang dapat membantu kalian agar senantiasa sehat :ok_hand:
+Repository ini berisi web yang dapat membantu kalian agar senantiasa sehat :ok_hand: <br>
 Mari hidup sehat selamanya :blush:
