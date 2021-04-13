@@ -9,7 +9,7 @@ How to run web (Windows <img src="https://wiki.videolan.org/images/Windows_logo.
 1. Pastikan sudah menginstall xampp versi > 7.2 (*services* paket lengkap) pada default direktori ```C:\xampp```
 2. Pastikan mempunyai ***google chrome***
 3. Clone *repository* ini ke dalam folder bernama ```Antriin```
-4. Klik kanan file ```sql_import.bat``` >> Run as administrator (hanya pertama kali saja seterusnya tidak wajib)
+4. Klik kanan file ```sql_import.bat``` >> Run as administrator
 5. Klik kanan file ```start_app.bat``` >> Run as administrator
 
 &nbsp;&nbsp;Setelah selesai jangan lupa mematikan *services* dengan klik kanan file ```stop_app.bat``` >> Run as administrator
