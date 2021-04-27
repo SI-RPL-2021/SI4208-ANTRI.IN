@@ -18,6 +18,22 @@
 </head>
 
 <body>
+    <!-- PHP Section -->
+    <?php
+        // __DIR__.$_SERVER['DOCUMENT_ROOT'].dirname(__FILE__)
+        require '../controllers/db_connnect.php';
+        if (!empty($_COOKIE['log_rem_me'])) {
+            $username = $_COOKIE['log_uname_user'];
+            $sandi = $_COOKIE['log_pass_user'];
+            $rem_me = $_COOKIE['log_rem_me'];
+        } else {
+            $username = null;
+            $sandi = null;
+            $rem_me = null;
+        }
+    ?>
+
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="">
             <img src="../storages/gambar/logo.png" width="150" height="80" alt="ANTRI.IN">
@@ -29,21 +45,31 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-
-            <ul class="navbar-nav ml-auto mr-4">
-
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link " href="home.html">Apotek
-                        <!-- <span class="sr-only">(current)</span> -->
                     </a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link js-scroll" href="katalog.html">Cari Dokter
-                        <span class="sr-only">(current)</span></a>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll" href="pemesanan.html">Rumah Sakit
-                        <!-- <span class="sr-only">(current)</span> -->
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link " href="">Login
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link js-scroll" href="">Register
                     </a>
                 </li>
             </ul>
@@ -52,10 +78,66 @@
 
 
     <!-- Content -->
-    <div class="container pt-4">
+    <div class="container pt-4 mt-4">
         <div class="row pt-5 pr-3 pl-3">
             <h1>Hello, world!</h1>
         </div>
+
+        <div class="row px-5">
+            <div class="col-md-12">
+
+            </div>
+            <div class="col-md-12" style="background-color: rgb(255, 255, 255); border-radius: 20px;">
+                <img src="../storages/gambar/logo2.png" alt=""><br>
+                <form action="../controllers/db_connnect.php" method="POST">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="username_login" class="form-label">Username</label>
+                        </div>
+                        <div class="form-group col-md-auto">
+                            <input type="text" class="form-control" name="username_login" value="<?= $username?>"
+                                required="required">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="kata_sandi" class="form-label">Kata Sandi</label>
+                        </div>
+                        <div class="form-group col-md-auto">
+                            <input type="password" class="form-control" name="kata_sandi" value="<?= $sandi?>"
+                                required="required">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            Ingat Saya
+                        </div>
+                        <div class="form-group col-md-auto">
+                            <div class="form-check">
+
+                                <input class="form-check-input" type="checkbox" name="rem_me" value="Remember Me"
+                                    id="rem_me" <?= $rem_me?>>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <button type="submit" class="btn btn-primary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <input type="submit" class="btn btn-secondary" value="Cancel" data-dismiss="modal"></input> -->
+                    <div class="mb-3 text-center">
+                        <input type="submit" class="btn btn-primary" value="Sign In" name="sign_in"></input>
+                    </div>
+                    <div class="mb-3 text-center">
+                        Belum punya akun? <a href="">Register disini</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-12">
+
+            </div>
+        </div>
+
     </div>
 
     <!-- Bootstrap Bundle with Popper -->
