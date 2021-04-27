@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2021 at 06:36 PM
+-- Generation Time: Apr 01, 2021 at 04:29 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -30,15 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id_admin` bigint(20) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(70) NOT NULL
+  `password` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
-(0, 'admin01', '$2y$10$uodbUyd3pbIZaa/hc7lQEuGtjqYSgWsZlDCQX41x9r7F/GU37P9zm');
 
 -- --------------------------------------------------------
 
@@ -49,7 +42,7 @@ INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
 CREATE TABLE `akun` (
   `id_akun` bigint(20) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(70) NOT NULL,
+  `password` varchar(30) NOT NULL,
   `email` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
