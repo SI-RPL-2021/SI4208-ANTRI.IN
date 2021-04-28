@@ -14,6 +14,12 @@ if(isset($_POST["add_dokter"])){
     header("Location: ../views/admins/adminDokter.php");
 }
 
+// tambah rumah sakit
+if(isset($_POST["add_hospital"])){
+    $_SESSION['eff_add'] = insert_hospital($_POST);
+    header("Location: ../views/admins/adminRumahSakit.php");
+}
+
 function insert_dokter($data, $user_id){
     global $conn;
     // $rs_row = view_data("SELECT * FROM `list_dokter`");
@@ -39,6 +45,31 @@ function insert_dokter($data, $user_id){
     }else{var_dump('gagal');}
 
     // mysqli_query($conn, $query);
+    $eff_rw = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    
+    return $eff_rw;
+}
+
+function insert_hospital($data){
+    global $conn;
+    // $rs_row = view_data("SELECT * FROM `list_dokter`");
+    $insert_stmt = '';
+    $query = '';
+
+    $id_rs = date("m").date("d").date("Y").date("H").strval(rand(100,999)).date("i");
+    $nama = $data['namaRs'];
+    $alamat = $data['alamatRs'];
+    $telepon = $data['telpRs'];
+    $query = "INSERT INTO `rumah_sakit` VALUES (?,?,?,?)";
+
+    $insert_stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($insert_stmt,'isss', $id_rs, $nama, $alamat, $telepon);
+
+    if(!empty($insert_stmt)){
+        mysqli_stmt_execute($insert_stmt);
+    }else{var_dump('gagal');}
+
     $eff_rw = mysqli_affected_rows($conn);
     mysqli_close($conn);
     
