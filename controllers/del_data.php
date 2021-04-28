@@ -9,6 +9,13 @@ if(isset($_GET['delp'])){
     header("Location: ../views/admins/adminDokter.php");
 }
 
+// delete pengguna
+if(isset($_GET['delsr'])){
+    $prod_id = $_GET['delsr'];
+    $_SESSION['eff_del_one'] = del_data_pasien($prod_id);
+    header("Location: ../views/admins/adminPengguna.php");
+}
+
 function del_data_dokter($key_item){
     global $conn;
 
