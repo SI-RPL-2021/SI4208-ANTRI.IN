@@ -45,13 +45,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Apotek</a>
+                        <a class="nav-link disabled" href="#">Apotek</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Cari Dokter</a>
+                        <a class="nav-link disabled" href="#">Cari Dokter</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Rumah Sakit</a>
+                        <a class="nav-link disabled" href="#">Rumah Sakit</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav d-flex">
@@ -59,12 +59,39 @@
                         <a class="nav-link active" aria-current="page" href="">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Register</a>
+                        <a class="nav-link" href="registrasi.php">Register</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <?php
+    // alert add course
+    if ($_SESSION['eff_add'] > 1) {
+        $_SESSION['eff_add'] = 0;
+    ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Berhasil mendaftar
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php 
+    // unset($_SESSION['eff_add']);
+    } else if ($_SESSION['eff_add'] ==1 ){
+        $_SESSION['eff_add'] = 0;
+    ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Gagal mendaftar akun!!!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php
+        // unset($_SESSION['eff_add']);
+    }
+    ?>
 
     <!-- Content -->
     <div class="container pt-4 mt-4">
@@ -115,7 +142,7 @@
                         <input type="submit" class="btn btn-primary" value="Sign In" name="sign_in"></input>
                     </div>
                     <div class="mb-3 text-center">
-                        Belum punya akun? <a href="">Register disini</a>
+                        Belum punya akun? <a href="registrasi.php">Daftar akun disini</a>
                     </div>
                 </form>
             </div>

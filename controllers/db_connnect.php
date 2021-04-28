@@ -19,12 +19,6 @@ if (isset($_GET['out_log'])) {
     }
 }
 
-// // register
-// if(isset($_POST["sign_up"])){
-//     $_SESSION['eff_rw'] = add_data($_POST, '');
-//     header("Location: login.php");
-// }
-
 // login
 if (isset($_POST["sign_in"])) {
     $username = $_POST["username_login"];
