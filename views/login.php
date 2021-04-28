@@ -66,38 +66,34 @@
         </div>
     </nav>
 
-    <?php
-    // alert add course
-    if ($_SESSION['eff_add'] > 1) {
-        $_SESSION['eff_add'] = 0;
-    ?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            Berhasil mendaftar
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <?php 
-    // unset($_SESSION['eff_add']);
-    } else if ($_SESSION['eff_add'] ==1 ){
-        $_SESSION['eff_add'] = 0;
-    ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Gagal mendaftar akun!!!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <?php
-        // unset($_SESSION['eff_add']);
-    }
-    ?>
-
     <!-- Content -->
     <div class="container pt-4 mt-4">
         <div class="row pt-5 pr-3 pl-3">
             <h1>Hello, world!</h1>
         </div>
+
+        <?php
+        // alert register
+        if ($_SESSION['eff_add'] > 0) {
+            $_SESSION['eff_add'] = -1;
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Berhasil mendaftar akun
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+            // unset($_SESSION['eff_add']);
+        } else if ($_SESSION['eff_add'] == 0) {
+            $_SESSION['eff_add'] = -1;
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Gagal mendaftar akun!!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+            // unset($_SESSION['eff_add']);
+        }
+        ?>
 
         <div class="row px-5">
             <div class="col-md-12">
