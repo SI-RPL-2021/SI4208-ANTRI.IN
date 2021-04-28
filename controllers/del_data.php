@@ -16,6 +16,13 @@ if(isset($_GET['delsr'])){
     header("Location: ../views/admins/adminPengguna.php");
 }
 
+// delete hospital
+if(isset($_GET['delrsh'])){
+    $prod_id = $_GET['delrsh'];
+    $_SESSION['eff_del_one'] = del_data_hospital($prod_id);
+    header("Location: ../views/admins/adminRumahSakit.php");
+}
+
 function del_data_dokter($key_item){
     global $conn;
 
@@ -48,7 +55,7 @@ function del_data_dokter($key_item){
 function del_data_hospital($key_item){
     global $conn;
 
-    $query = "DELETE from `Poliklinik` WHERE `Poliklinik`.`id_poli` = ?";
+    $query = "DELETE from `rumah_sakit` WHERE `rumah_sakit`.`id_rs` = ?";
     $del_stmt_one = mysqli_prepare($conn, $query);
     
     mysqli_stmt_bind_param($del_stmt_one, 'i', $key_item);
