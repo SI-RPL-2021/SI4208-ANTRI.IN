@@ -104,8 +104,8 @@ $result = view_data("SELECT * FROM list_dokter");
                   <button class="btn btn-light" type="submit">Edit</button>
                   <button class="btn btn-danger btnDelete" type="button" data-id="<?php echo $item['id'] ?>">Delete</button>
                 </form> -->
-                                    <button type="button" class="btn btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                    <a href="editDokter.html" type="button" class="btn btn-primary">Edit</a>
+                                    <a href="../../controllers/del_data.php?delp=<?= $item['id_dokter'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a>
                                 </td>
                             </tr>
                         <?php $no_dr += 1;

@@ -1,6 +1,13 @@
 <?php
-require 'db_connnect.php';
-require 'select_data.php';
+require_once 'db_connnect.php';
+require_once 'select_data.php';
+
+// delete specific doctor
+if(isset($_GET['delp'])){
+    $prod_id = $_GET['delp'];
+    $_SESSION['eff_del_one'] = del_data_dokter($prod_id);
+    header("Location: ../views/admins/adminDokter.php");
+}
 
 function del_data_dokter($key_item){
     global $conn;
