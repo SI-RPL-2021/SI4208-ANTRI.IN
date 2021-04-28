@@ -59,6 +59,20 @@ function del_data_hospital($key_item){
     return $eff_rw;
 }
 
+function del_data_pasien($key_item){
+    global $conn;
+
+    $query = "DELETE from `pengguna` WHERE `pengguna`.`id_user` = ?";
+    $del_stmt_one = mysqli_prepare($conn, $query);
+    
+    mysqli_stmt_bind_param($del_stmt_one, 'i', $key_item);
+    mysqli_stmt_execute($del_stmt_one);
+    // var_dump(mysqli_affected_rows($conn));
+    $eff_rw = mysqli_affected_rows($conn);
+    
+    return $eff_rw;
+}
+
 function del_data_apotek($key_item){
     global $conn;
 

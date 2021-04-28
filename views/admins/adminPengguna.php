@@ -78,7 +78,7 @@ $result = view_data("SELECT * FROM pengguna");
         ?>
 
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                Berhasil mengubah data dokter
+                Berhasil mengubah data pengguna
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php
@@ -87,7 +87,7 @@ $result = view_data("SELECT * FROM pengguna");
             $_SESSION['eff_add'] = -1;
         ?>
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                Gagal mengubah data dokter!!!
+                Gagal mengubah data pengguna!!!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php
