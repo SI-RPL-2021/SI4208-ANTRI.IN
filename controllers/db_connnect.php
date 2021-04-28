@@ -61,7 +61,7 @@ if (isset($_POST["sign_in"])) {
         }
 
         if ($user_tp == "admin") {
-            header("Location: ../views/admins/adminRumahSakit.html");
+            header("Location: ../views/admins/adminRumahSakit.php");
         } else {
             header("Location: ../views/index.php");
         }

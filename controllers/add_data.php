@@ -1,5 +1,5 @@
 <?php
-require 'db_connect.php';
+require 'db_connnect.php';
 require 'select_data.php';
 
 function insert_dokter($data, $user_id){

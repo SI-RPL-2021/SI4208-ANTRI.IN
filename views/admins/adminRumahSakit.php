@@ -1,3 +1,4 @@
+<?php require '../../controllers/select_data.php'; ?>
 <!doctype html>
 <html lang="en">
 
@@ -10,11 +11,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
     <!-- Datatable -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
 
-    <title>Admin | Data Pengguna</title>
+    <title>Admin | Rumah Sakit</title>
 </head>
 
 <body style="background-color: rgb(181, 240, 181);">
@@ -33,13 +36,13 @@
                         <a class="nav-link" href="#">Apotek</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="adminDokter.html">Dokter</a>
+                        <a class="nav-link" href="adminDokter.php">Dokter</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Pasien</a>
+                        <a class="nav-link" href="adminPengguna.php">Pasien</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="adminRumahSakit.html">Rumah Sakit</a>
+                        <a class="nav-link active" aria-current="page" href="">Rumah Sakit</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav d-flex">
@@ -69,16 +72,19 @@
     <!--Container body-->
     <div class="container pt-5" style="background-color: white;">
         <br>
-        <h1>DATA PASIEN</h1>
+        <h1>DATA RUMAH SAKIT</h1>
         <br>
     </div>
+    
     <br>
     <div class="container" style="background-color: white; border-radius: 6px;">
-        <table class="table" id="table_usr">
+        <br>
+        <a href="tambahRumahSakit.html">Tambahkan Rumah Sakit</a>
+        <table class="table" id="table_rs">
             <thead>
                 <tr>
                     <th scope="col">Nomor</th>
-                    <th scope="col">Nama Pasien</th>
+                    <th scope="col">Nama Rumah Sakit</th>
                     <th scope="col">Alamat</th>
                     <th scope="col">No Telepon</th>
                     <th scope="col">Aksi</th>
@@ -93,6 +99,7 @@
                     <td>
                         <button type="button" class="btn btn-primary">Edit</button>
                         <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-success">Poliklinik</button>
                     </td>
                 </tr>
                 <tr>
@@ -124,7 +131,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#table_usr').DataTable();
+            $('#table_rs').DataTable();
 
             //   $('.btnDelete').click(function() {
             //     let id = $(this).data('id')
