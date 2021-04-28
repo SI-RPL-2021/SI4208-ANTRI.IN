@@ -20,7 +20,7 @@
     <!-- PHP Section -->
     <?php
     // __DIR__.$_SERVER['DOCUMENT_ROOT'].dirname(__FILE__)
-    require '../controllers/db_connnect.php';
+    require '../controllers/select_data.php';
     if (!empty($_COOKIE['log_rem_me'])) {
         $username = $_COOKIE['log_uname_user'];
         $sandi = $_COOKIE['log_pass_user'];
@@ -36,7 +36,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgb(143, 219, 143);">
         <div class="container">
             <a class="navbar-brand" href="">
-                <img src="../storages/gambar/logo.png" alt="ANTRI.IN" width="150" height="80">
+                <img src="../storages/gambar/logo.png" width="60" alt="ANTRI.IN">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,38 +66,34 @@
         </div>
     </nav>
 
-    <?php
-    // alert add course
-    if ($_SESSION['eff_add'] > 1) {
-        $_SESSION['eff_add'] = 0;
-    ?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            Berhasil mendaftar
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <?php 
-    // unset($_SESSION['eff_add']);
-    } else if ($_SESSION['eff_add'] ==1 ){
-        $_SESSION['eff_add'] = 0;
-    ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Gagal mendaftar akun!!!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <?php
-        // unset($_SESSION['eff_add']);
-    }
-    ?>
-
     <!-- Content -->
     <div class="container pt-4 mt-4">
         <div class="row pt-5 pr-3 pl-3">
             <h1>Hello, world!</h1>
         </div>
+
+        <?php
+        // alert register
+        if ($_SESSION['eff_add'] > 0) {
+            $_SESSION['eff_add'] = -1;
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Berhasil mendaftar akun
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+            // unset($_SESSION['eff_add']);
+        } else if ($_SESSION['eff_add'] == 0) {
+            $_SESSION['eff_add'] = -1;
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Gagal mendaftar akun!!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+            // unset($_SESSION['eff_add']);
+        }
+        ?>
 
         <div class="row px-5">
             <div class="col-md-12">
@@ -105,7 +101,7 @@
             </div>
             <div class="col-md-12" style="background-color: rgb(255, 255, 255); border-radius: 20px;">
                 <img src="../storages/gambar/logo2.png" alt=""><br>
-                <form action="../controllers/db_connnect.php" method="POST">
+                <form action="../controllers/select_data.php" method="POST">
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label for="username_login" class="form-label">Username</label>
