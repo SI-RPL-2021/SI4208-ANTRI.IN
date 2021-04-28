@@ -69,6 +69,33 @@ $result = view_data("SELECT * FROM list_dokter");
     <div class="container pt-5" style="background-color: white;">
         <br>
         <h1>DATA DOKTER</h1>
+
+        <?php
+        // alert edit data
+        if ($_SESSION['eff_add'] > 0 or $_SESSION['eff_edit'] > 0 or $_SESSION['eff_del_one'] > 0) {
+            $_SESSION['eff_add'] = -1;
+            $_SESSION['eff_del_one'] = -1;
+            $_SESSION['eff_edit'] = -1;
+        ?>
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Berhasil mengubah data dokter
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+            // unset($_SESSION['eff_add']);
+        } else if ($_SESSION['eff_add'] == 0) {
+            $_SESSION['eff_add'] = -1;
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Gagal mengubah data dokter!!!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+            // unset($_SESSION['eff_add']);
+        }
+        ?>
+
         <div class="card text-dark bg-light my-5" style="max-width: 100%;">
             <div class="card-header">
                 <div class="row justify-content-between ml-2 mr-2">.
@@ -104,7 +131,7 @@ $result = view_data("SELECT * FROM list_dokter");
                   <button class="btn btn-light" type="submit">Edit</button>
                   <button class="btn btn-danger btnDelete" type="button" data-id="<?php echo $item['id'] ?>">Delete</button>
                 </form> -->
-                                    <a href="editDokter.html" type="button" class="btn btn-primary">Edit</a>
+                                    <a href="editDokter.php?id_dok=<?= $item['id_dokter'] ?>" type="button" class="btn btn-primary">Edit</a>
                                     <a href="../../controllers/del_data.php?delp=<?= $item['id_dokter'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a>
                                 </td>
                             </tr>
