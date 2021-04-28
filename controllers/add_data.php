@@ -8,6 +8,12 @@ if(isset($_POST["daftar_akun"])){
     header("Location: ../views/login.php");
 }
 
+// tambah dokter
+if(isset($_POST["add_dokter"])){
+    $_SESSION['eff_add'] = insert_dokter($_POST, '');
+    header("Location: ../views/admins/adminDokter.php");
+}
+
 function insert_dokter($data, $user_id){
     global $conn;
     // $rs_row = view_data("SELECT * FROM `list_dokter`");
@@ -19,10 +25,10 @@ function insert_dokter($data, $user_id){
     $spesialis = '';
     $telepon = '';
 
-    $id_dok = date("d").strval(rand(100,999)).date("H").date("i");
-    $nama = $data['nama_dokter'];
-    $spesialis = $data['spesialis_dokter'];
-    $telepon = $data['telepon_dokter'];
+    $id_dok = date("Y").date("m").date("d").strval(rand(100,999)).date("H").date("i");
+    $nama = $data['namaDokter'];
+    $spesialis = $data['splDokter'];
+    $telepon = $data['noHpDokter'];
     $query = "INSERT INTO `list_dokter` VALUES (?,?,?,?)";
 
     $insert_stmt = mysqli_prepare($conn, $query);

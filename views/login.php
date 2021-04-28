@@ -36,7 +36,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgb(143, 219, 143);">
         <div class="container">
             <a class="navbar-brand" href="">
-                <img src="../storages/gambar/logo.png" alt="ANTRI.IN" width="150" height="80">
+                <img src="../storages/gambar/logo.png" width="60" alt="ANTRI.IN">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
