@@ -81,7 +81,7 @@ if (isset($_GET['id_rs'])) {
         <div class="card text-dark bg-light my-5" style="max-width: 100%;">
             <div class="card-header">
                 <div class="row justify-content-between ml-2 mr-2">.
-                    <a class="btn btn-success" href="tambahPoliklinik.html">
+                    <a class="btn btn-success" href="tambahPoliklinik.php?id_rs=<?= $_SESSION['id_no'] ?>">
                         Tambahkan poliklinik
                     </a>
                 </div>
@@ -109,7 +109,6 @@ if (isset($_GET['id_rs'])) {
                                 <td><?php echo $item['nama_poli'] ?></td>
                                 <td><?php echo $dr_res['nama_dokter'] ?></td>
                                 <td><?php echo $item['jadwal_buka'] ?></td>
-                                <td><?php echo $item['no_telepon'] ?></td>
                                 <td>
                                     <a href="editPoliklinik.php?id_poli=<?= $item['id_poli'] ?>" type="button" class="btn btn-primary">Edit</a>
                                     <a href="../../controllers/del_data.php?delpl=<?= $item['id_poli'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a>
