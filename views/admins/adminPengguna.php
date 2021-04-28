@@ -1,3 +1,4 @@
+<?php require '../../controllers/select_data.php'; ?>
 <!doctype html>
 <html lang="en">
 
@@ -14,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
 
-    <title>Admin | Data Dokter</title>
+    <title>Admin | Data Pengguna</title>
 </head>
 
 <body style="background-color: rgb(181, 240, 181);">
@@ -33,13 +34,13 @@
                         <a class="nav-link" href="#">Apotek</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Dokter</a>
+                        <a class="nav-link" href="adminDokter.php">Dokter</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="adminPengguna.html">Pasien</a>
+                        <a class="nav-link active" aria-current="page" href="">Pasien</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="adminRumahSakit.html">Rumah Sakit</a>
+                        <a class="nav-link" href="adminRumahSakit.php">Rumah Sakit</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav d-flex">
@@ -69,20 +70,17 @@
     <!--Container body-->
     <div class="container pt-5" style="background-color: white;">
         <br>
-        <h1>DATA DOKTER</h1>
+        <h1>DATA PASIEN</h1>
         <br>
     </div>
     <br>
     <div class="container" style="background-color: white; border-radius: 6px;">
-        <br>
-        <a href="tambahDokter.html">Tambahkan dokter baru</a>
-        <br>
-        <table class="table" id="table_dr">
+        <table class="table" id="table_usr">
             <thead>
                 <tr>
                     <th scope="col">Nomor</th>
-                    <th scope="col">Nama Dokter</th>
-                    <th scope="col">Specialis</th>
+                    <th scope="col">Nama Pasien</th>
+                    <th scope="col">Alamat</th>
                     <th scope="col">No Telepon</th>
                     <th scope="col">Aksi</th>
                 </tr>
@@ -127,7 +125,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#table_dr').DataTable();
+            $('#table_usr').DataTable();
 
             //   $('.btnDelete').click(function() {
             //     let id = $(this).data('id')

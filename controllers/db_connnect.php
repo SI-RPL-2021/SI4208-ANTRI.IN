@@ -19,12 +19,6 @@ if (isset($_GET['out_log'])) {
     }
 }
 
-// // register
-// if(isset($_POST["sign_up"])){
-//     $_SESSION['eff_rw'] = add_data($_POST, '');
-//     header("Location: login.php");
-// }
-
 // login
 if (isset($_POST["sign_in"])) {
     $username = $_POST["username_login"];
@@ -61,7 +55,7 @@ if (isset($_POST["sign_in"])) {
         }
 
         if ($user_tp == "admin") {
-            header("Location: ../views/admins/adminRumahSakit.html");
+            header("Location: ../views/admins/adminRumahSakit.php");
         } else {
             header("Location: ../views/index.php");
         }

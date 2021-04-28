@@ -1,5 +1,5 @@
 <?php
-require 'db_connect.php';
+require 'db_connnect.php';
 require 'select_data.php';
 
 function del_data_dokter($key_item){

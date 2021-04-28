@@ -1,5 +1,5 @@
 <?php
-require 'db_connect.php';
+require_once 'db_connnect.php';
 
 function view_data($query){
     global $conn;
