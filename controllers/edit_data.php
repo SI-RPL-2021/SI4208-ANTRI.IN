@@ -2,6 +2,12 @@
 require_once 'db_connnect.php';
 require_once 'select_data.php';
 
+// ubah profile
+if(isset($_POST["edit_profile"])){
+    $_SESSION['eff_edit'] = update_profile($_POST, $_SESSION['id_no']);
+    header("Location: ../views/pengguna/editProfile.php");
+}
+
 // ubah dokter
 if(isset($_POST["edit_dokter"])){
     $_SESSION['eff_edit'] = update_dokter($_POST, $_SESSION['id_no']);
@@ -24,6 +30,39 @@ if(isset($_POST["edit_hospital"])){
 if(isset($_POST["edit_poli"])){
     $_SESSION['eff_edit'] = update_poli($_POST, $_SESSION['id_no']);
     header("Location: ../views/admins/adminPoliklinik.php?id_rs=".$_POST['id_rs_hid']);
+}
+
+function update_profile($data, $id_user){
+    global $conn;
+    // $rs_row = view_data("SELECT * FROM `pengguna` WHERE id_user='$id_user'")[0];
+    $update_stmt = '';
+    $query = '';
+
+    $username = $_POST["username_regis"];
+    $email = $_POST["email_reg"];
+    // $password = $_POST["kata_sandi_reg"];
+    // $hash_pass = password_hash($password, PASSWORD_DEFAULT);
+
+    $nama = $_POST["nama"];
+    $gender = $_POST["jeniskelamin"];
+    $birthday = $_POST["birthday"];
+    $alamat = $_POST["alamat"];
+    $ktp = $_POST["ktp"];
+    $phone = $_POST["telepon"];
+    $query = "UPDATE `pengguna` SET `nama_lengkap`=?, `no_ktp`=?, `tanggal_lahir`=?, `jenis_kelamin`=?, `alamat`=?, `no_telepon`=? WHERE `id_user`=?";
+
+    $update_stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($update_stmt,'ssssssi', $nama, $ktp, $birthday, $gender, $alamat, $phone, $id_user);
+
+    if(!empty($update_stmt)){
+        mysqli_stmt_execute($update_stmt);
+    }else{var_dump('gagal');}
+
+    // mysqli_query($conn, $query);
+    $eff_rw = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    
+    return $eff_rw;
 }
 
 function update_dokter($data, $id_dok){

@@ -144,7 +144,7 @@ function register_akun($user_id){
     $query = "INSERT INTO pengguna VALUES (?,?,?,?,?,?,?,?)";
 
     $insert_stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($insert_stmt,'issssssi', $id_usr, $nama, $gender, $birthday, $alamat, $ktp, $phone, $id_akn);
+    mysqli_stmt_bind_param($insert_stmt,'issssssi', $id_usr, $nama, $ktp, $birthday, $gender, $alamat, $phone, $id_akn);
 
     if(!empty($insert_stmt)){
         mysqli_stmt_execute($insert_stmt);
