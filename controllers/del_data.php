@@ -16,6 +16,20 @@ if(isset($_GET['delsr'])){
     header("Location: ../views/admins/adminPengguna.php");
 }
 
+// delete hospital
+if(isset($_GET['delrsh'])){
+    $prod_id = $_GET['delrsh'];
+    $_SESSION['eff_del_one'] = del_data_hospital($prod_id);
+    header("Location: ../views/admins/adminRumahSakit.php");
+}
+
+// delete hospital
+if(isset($_GET['delpl'])){
+    $prod_id = $_GET['delpl'];
+    $_SESSION['eff_del_one'] = del_data_poli($prod_id);
+    header("Location: ../views/admins/adminPoliklinik.php?id_rs=".$_GET['id_rs']);
+}
+
 function del_data_dokter($key_item){
     global $conn;
 
@@ -48,7 +62,35 @@ function del_data_dokter($key_item){
 function del_data_hospital($key_item){
     global $conn;
 
-    $query = "DELETE from `Poliklinik` WHERE `Poliklinik`.`id_poli` = ?";
+    $query = "DELETE from `rumah_sakit` WHERE `rumah_sakit`.`id_rs` = ?";
+    $del_stmt_one = mysqli_prepare($conn, $query);
+    
+    mysqli_stmt_bind_param($del_stmt_one, 'i', $key_item);
+    mysqli_stmt_execute($del_stmt_one);
+    // var_dump(mysqli_affected_rows($conn));
+    $eff_rw = mysqli_affected_rows($conn);
+    
+    return $eff_rw;
+}
+
+function del_data_poli($key_item){
+    global $conn;
+
+    $query = "DELETE from `poliklinik` WHERE `poliklinik`.`id_poli` = ?";
+    $del_stmt_one = mysqli_prepare($conn, $query);
+    
+    mysqli_stmt_bind_param($del_stmt_one, 'i', $key_item);
+    mysqli_stmt_execute($del_stmt_one);
+    // var_dump(mysqli_affected_rows($conn));
+    $eff_rw = mysqli_affected_rows($conn);
+    
+    return $eff_rw;
+}
+
+function del_data_pasien($key_item){
+    global $conn;
+
+    $query = "DELETE from `pengguna` WHERE `pengguna`.`id_user` = ?";
     $del_stmt_one = mysqli_prepare($conn, $query);
     
     mysqli_stmt_bind_param($del_stmt_one, 'i', $key_item);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2021 at 11:23 AM
+-- Generation Time: Apr 27, 2021 at 06:36 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -53,13 +53,6 @@ CREATE TABLE `akun` (
   `email` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `akun`
---
-
-INSERT INTO `akun` (`id_akun`, `username`, `password`, `email`) VALUES
-(4280444697, 'user02', '$2y$10$wPn3I/wbVT41KFHMwnH4COXs/W8gJG77uxeY8KOonyZ/UiZA2O6Nq', 'jskd@hhjsks.com');
-
 -- --------------------------------------------------------
 
 --
@@ -87,17 +80,6 @@ CREATE TABLE `list_dokter` (
   `no_telepon` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `list_dokter`
---
-
-INSERT INTO `list_dokter` (`id_dokter`, `nama_dokter`, `spesialis`, `no_telepon`) VALUES
-(202104281210534, 'Rachel', 'Kandungan', '920023203'),
-(202104281360554, 'Mark', 'Penyakit dalam', '0892382399'),
-(202104281730631, 'Thorston', 'Ortopedi', '0882993434'),
-(202104283540553, 'Lisa', 'Anak', '39393939'),
-(202104284320535, 'George', 'THT', '343434');
-
 -- --------------------------------------------------------
 
 --
@@ -115,13 +97,6 @@ CREATE TABLE `pengguna` (
   `id_akun` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `pengguna`
---
-
-INSERT INTO `pengguna` (`id_user`, `nama_lengkap`, `no_ktp`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `no_telepon`, `id_akun`) VALUES
-(202104280444361, 'User kedua bernama siapa', '939933112922', '2021-04-07', 'laki-laki', 'jalan raya kebun jati', '082993293', 4280444697);
-
 -- --------------------------------------------------------
 
 --
@@ -132,17 +107,8 @@ CREATE TABLE `poliklinik` (
   `id_poli` bigint(20) NOT NULL,
   `nama_poli` varchar(50) NOT NULL,
   `jadwal_buka` varchar(30) NOT NULL,
-  `id_dokter` bigint(20) NOT NULL,
-  `id_rs` bigint(20) NOT NULL
+  `id_dokter` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `poliklinik`
---
-
-INSERT INTO `poliklinik` (`id_poli`, `nama_poli`, `jadwal_buka`, `id_dokter`, `id_rs`) VALUES
-(42810496202121, 'Sehat dimulai dari dalam diri', '15:00-23:00', 202104281360554, 42820210835905),
-(42810520202120, 'Spesialis Kandungan Sejahtera', '08:00-12:00', 202104281210534, 42820210835905);
 
 -- --------------------------------------------------------
 
@@ -195,15 +161,9 @@ CREATE TABLE `rumah_sakit` (
   `id_rs` bigint(20) NOT NULL,
   `nama_rs` varchar(30) NOT NULL,
   `alamat_rs` text NOT NULL,
-  `no_telepon_rs` varchar(15) NOT NULL
+  `no_telepon_rs` varchar(15) NOT NULL,
+  `id_poli` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `rumah_sakit`
---
-
-INSERT INTO `rumah_sakit` (`id_rs`, `nama_rs`, `alamat_rs`, `no_telepon_rs`) VALUES
-(42820210835905, 'Medica Husada Bakti Jaya', 'jalan Jenderal Sudirman', '98394 39390023');
 
 --
 -- Indexes for dumped tables
@@ -246,17 +206,16 @@ ALTER TABLE `pengguna`
 --
 ALTER TABLE `poliklinik`
   ADD PRIMARY KEY (`id_poli`),
-  ADD KEY `fk_id_dokter` (`id_dokter`),
-  ADD KEY `fk_id_rs_poli` (`id_rs`);
+  ADD KEY `fk_id_dokter` (`id_dokter`);
 
 --
 -- Indexes for table `rekam_medis`
 --
 ALTER TABLE `rekam_medis`
   ADD PRIMARY KEY (`id_rekam_medis`),
-  ADD KEY `fk_id_reservasi` (`id_reservasi`),
+  ADD KEY `fk_id_user2` (`id_user`),
   ADD KEY `fk_id_rs2` (`id_rs`),
-  ADD KEY `fk_id_user2` (`id_user`);
+  ADD KEY `fk_id_reservasi` (`id_reservasi`);
 
 --
 -- Indexes for table `resep_obat`
@@ -270,15 +229,16 @@ ALTER TABLE `resep_obat`
 --
 ALTER TABLE `reservasi`
   ADD PRIMARY KEY (`id_reservasi`),
-  ADD KEY `fk_id_dokter2` (`id_dokter`),
+  ADD KEY `fk_id_user` (`id_user`),
   ADD KEY `fk_id_rs` (`id_rs`),
-  ADD KEY `fk_id_user` (`id_user`);
+  ADD KEY `fk_id_dokter2` (`id_dokter`);
 
 --
 -- Indexes for table `rumah_sakit`
 --
 ALTER TABLE `rumah_sakit`
-  ADD PRIMARY KEY (`id_rs`);
+  ADD PRIMARY KEY (`id_rs`),
+  ADD KEY `fk_id_poli` (`id_poli`);
 
 --
 -- Constraints for dumped tables
@@ -288,42 +248,47 @@ ALTER TABLE `rumah_sakit`
 -- Constraints for table `apotek`
 --
 ALTER TABLE `apotek`
-  ADD CONSTRAINT `fk_id_resep_obat` FOREIGN KEY (`id_resep_obat`) REFERENCES `resep_obat` (`id_resep_obat`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_id_resep_obat` FOREIGN KEY (`id_resep_obat`) REFERENCES `resep_obat` (`id_resep_obat`);
 
 --
 -- Constraints for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  ADD CONSTRAINT `fk_id_akun` FOREIGN KEY (`id_akun`) REFERENCES `akun` (`id_akun`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_id_akun` FOREIGN KEY (`id_akun`) REFERENCES `akun` (`id_akun`);
 
 --
 -- Constraints for table `poliklinik`
 --
 ALTER TABLE `poliklinik`
-  ADD CONSTRAINT `fk_id_dokter` FOREIGN KEY (`id_dokter`) REFERENCES `list_dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_id_rs_poli` FOREIGN KEY (`id_rs`) REFERENCES `rumah_sakit` (`id_rs`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_id_dokter` FOREIGN KEY (`id_dokter`) REFERENCES `list_dokter` (`id_dokter`);
 
 --
 -- Constraints for table `rekam_medis`
 --
 ALTER TABLE `rekam_medis`
-  ADD CONSTRAINT `fk_id_reservasi` FOREIGN KEY (`id_reservasi`) REFERENCES `reservasi` (`id_reservasi`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_id_rs2` FOREIGN KEY (`id_rs`) REFERENCES `rumah_sakit` (`id_rs`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_id_user2` FOREIGN KEY (`id_user`) REFERENCES `pengguna` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_id_reservasi` FOREIGN KEY (`id_reservasi`) REFERENCES `reservasi` (`id_reservasi`),
+  ADD CONSTRAINT `fk_id_rs2` FOREIGN KEY (`id_rs`) REFERENCES `rumah_sakit` (`id_rs`),
+  ADD CONSTRAINT `fk_id_user2` FOREIGN KEY (`id_user`) REFERENCES `pengguna` (`id_user`);
 
 --
 -- Constraints for table `resep_obat`
 --
 ALTER TABLE `resep_obat`
-  ADD CONSTRAINT `fk_id_rekam_medis` FOREIGN KEY (`id_rekam_medis`) REFERENCES `rekam_medis` (`id_rekam_medis`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_id_rekam_medis` FOREIGN KEY (`id_rekam_medis`) REFERENCES `rekam_medis` (`id_rekam_medis`);
 
 --
 -- Constraints for table `reservasi`
 --
 ALTER TABLE `reservasi`
-  ADD CONSTRAINT `fk_id_dokter2` FOREIGN KEY (`id_dokter`) REFERENCES `list_dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_id_rs` FOREIGN KEY (`id_rs`) REFERENCES `rumah_sakit` (`id_rs`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_id_user` FOREIGN KEY (`id_user`) REFERENCES `pengguna` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_id_dokter2` FOREIGN KEY (`id_dokter`) REFERENCES `list_dokter` (`id_dokter`),
+  ADD CONSTRAINT `fk_id_rs` FOREIGN KEY (`id_rs`) REFERENCES `rumah_sakit` (`id_rs`),
+  ADD CONSTRAINT `fk_id_user` FOREIGN KEY (`id_user`) REFERENCES `pengguna` (`id_user`);
+
+--
+-- Constraints for table `rumah_sakit`
+--
+ALTER TABLE `rumah_sakit`
+  ADD CONSTRAINT `fk_id_poli` FOREIGN KEY (`id_poli`) REFERENCES `poliklinik` (`id_poli`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

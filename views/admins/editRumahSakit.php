@@ -1,9 +1,9 @@
 <?php
 require_once '../../controllers/select_data.php';
 
-if (isset($_GET['id_dok'])) {
-    $id_num = $_GET['id_dok'];
-    $result = view_data("SELECT * FROM list_dokter WHERE id_dokter=$id_num")[0];
+if (isset($_GET['id_rs'])) {
+    $id_num = $_GET['id_rs'];
+    $result = view_data("SELECT * FROM rumah_sakit WHERE id_rs=$id_num")[0];
     $_SESSION['id_no'] = $id_num;
 }
 ?>
@@ -18,7 +18,7 @@ if (isset($_GET['id_dok'])) {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-    <title>Admin | Edit Data Dokter</title>
+    <title>Admin | Edit Data Rumah Sakit</title>
 </head>
 
 <body style="background-color: rgb(181, 240, 181);">
@@ -34,16 +34,16 @@ if (isset($_GET['id_dok'])) {
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
                             <a class="nav-link active" aria-current="page" href="">
-                                <h4>Edit Data Dokter</h4>
+                                <h4>Edit Data Rumah Sakit</h4>
                             </a>
                         </li>
                     </ul>
                 </div>
-                <a href="adminDokter.php" type="button" class="btn btn-danger">Cancel</a>
+                <a href="adminRumahSakit.php" type="button" class="btn btn-danger">Cancel</a>
                 &nbsp;&nbsp;
                 <!--Form-->
                 <form action="../../controllers/edit_data.php" method="POST">
-                    <input type="submit" class="btn btn-primary" value="Simpan" name="edit_dokter"></input>
+                    <input type="submit" class="btn btn-primary" value="Simpan" name="edit_hospital"></input>
                     &nbsp;&nbsp;
             </nav>
         </div>
@@ -59,31 +59,28 @@ if (isset($_GET['id_dok'])) {
             <div class="row">
                 <div class="col-sm">
                     <center>
-                        <img src="../../storages/gambar/cwo.png" alt="">
+                        <img src="../../storages/gambar/rs.png" width="250">
                     </center>
                 </div>
                 <div class="col-sm">
-
                     <div class="mb-3">
-                        <label for="exampleInputNama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="exampleInputNama" name="namaDokter" aria-describedby="namaHelp" value="<?= $result['nama_dokter'] ?>">
+                        <label for="exampleInputNama" class="form-label">Nama Rumah Sakit</label>
+                        <input type="nama" class="form-control" id="exampleInputNama" aria-describedby="namaHelp" name="namaRs" value="<?= $result['nama_rs'] ?>">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputSpesialis" class="form-label">Spesialis</label>
-                        <input type="text" class="form-control" id="exampleInputSpesialis" name="splDokter" aria-describedby="spesialisHelp" value="<?= $result['spesialis'] ?>">
+                        <label for="exampleInputAlamat" class="form-label">Alamat</label>
+                        <input type="alamat" class="form-control" id="exampleInputAlamat" aria-describedby="alamatHelp" name="alamatRs" value="<?= $result['alamat_rs'] ?>">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputNohp" class="form-label">No Telepon</label>
-                        <input type="text" class="form-control" id="exampleInputNohp" name="noHpDokter" aria-describedby="nohpHelp" value="<?= $result['no_telepon'] ?>">
+                        <label for="exampleInputTelp" class="form-label">No Telepon</label>
+                        <input type="telp" class="form-control" id="exampleInputTelp" aria-describedby="telpHelp" name="telpRs" value="<?= $result['no_telepon_rs'] ?>">
                     </div>
 
                     </form>
                     <!--Form-->
                 </div>
                 <div class="col-sm">
-                    <center>
-                        <img src="../../storages/gambar/cwe.png" alt="">
-                    </center>
+
                 </div>
             </div>
         </div>
@@ -92,7 +89,8 @@ if (isset($_GET['id_dok'])) {
     </div>
 
     <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
