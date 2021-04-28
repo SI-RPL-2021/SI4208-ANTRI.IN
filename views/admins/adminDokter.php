@@ -46,7 +46,7 @@ $result = view_data("SELECT * FROM list_dokter");
                 <ul class="navbar-nav d-flex">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Hi, Admin
+                            Hi, <?= $_SESSION['log_uname'] ?>
                         </a>
 
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -20,7 +20,7 @@
     <!-- PHP Section -->
     <?php
     // __DIR__.$_SERVER['DOCUMENT_ROOT'].dirname(__FILE__)
-    require '../controllers/db_connnect.php';
+    require '../controllers/select_data.php';
     if (!empty($_COOKIE['log_rem_me'])) {
         $username = $_COOKIE['log_uname_user'];
         $sandi = $_COOKIE['log_pass_user'];
@@ -105,7 +105,7 @@
             </div>
             <div class="col-md-12" style="background-color: rgb(255, 255, 255); border-radius: 20px;">
                 <img src="../storages/gambar/logo2.png" alt=""><br>
-                <form action="../controllers/db_connnect.php" method="POST">
+                <form action="../controllers/select_data.php" method="POST">
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label for="username_login" class="form-label">Username</label>
