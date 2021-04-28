@@ -111,7 +111,7 @@ if (isset($_GET['id_rs'])) {
                                 <td><?php echo $item['jadwal_buka'] ?></td>
                                 <td>
                                     <a href="editPoliklinik.php?id_poli=<?= $item['id_poli'] ?>" type="button" class="btn btn-primary">Edit</a>
-                                    <a href="../../controllers/del_data.php?delpl=<?= $item['id_poli'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a>
+                                    <a href="../../controllers/del_data.php?delpl=<?= $item['id_poli'] ?>&id_rs=<?= $_SESSION['id_no'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a>
                                 </td>
                             </tr>
                         <?php $no_dr += 1;

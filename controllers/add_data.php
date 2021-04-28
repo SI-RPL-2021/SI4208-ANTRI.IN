@@ -23,7 +23,8 @@ if(isset($_POST["add_hospital"])){
 // tambah poliklinik
 if(isset($_POST["add_poli"])){
     $_SESSION['eff_add'] = insert_poli($_POST);
-    header("Location: ../views/admins/adminRumahSakit.php");
+    // header("Location: ../views/admins/adminRumahSakit.php");
+    header("Location: ../views/admins/adminPoliklinik.php?id_rs=".$_POST['id_rs_hid']);
 }
 
 function insert_dokter($data, $user_id){
