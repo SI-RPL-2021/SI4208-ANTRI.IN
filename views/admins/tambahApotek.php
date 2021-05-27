@@ -13,8 +13,7 @@ $pggn = view_data("SELECT * FROM pengguna");
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
     <title>Admin | Tambahkan Data Apotek</title>
 
@@ -71,30 +70,42 @@ $pggn = view_data("SELECT * FROM pengguna");
 
                         <div class="mb-3">
                             <label for="exampleInputNama" class="form-label">Nama Apotek</label>
-                            <input type="nama" class="form-control" id="exampleInputNama" name="namaApotek"
-                                aria-describedby="namaHelp">
+                            <input type="nama" class="form-control" id="exampleInputNama" name="namaApotek" aria-describedby="namaHelp">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputAlamat" class="form-label">Alamat</label>
-                            <input type="alamat" class="form-control" id="exampleInputAlamat" name="alamatApotek"
-                                aria-describedby="alamatHelp">
+                            <input type="alamat" class="form-control" id="exampleInputAlamat" name="alamatApotek" aria-describedby="alamatHelp">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputTelp" class="form-label">No Telepon</label>
-                            <input type="telp" class="form-control" id="exampleInputTelp" name="telpApotek"
-                                aria-describedby="telpHelp">
+                            <input type="telp" class="form-control" id="exampleInputTelp" name="telpApotek" aria-describedby="telpHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputPasien" class="form-label">Nama Pasien</label>
+                            <!-- <label for="exampleInputPasien" class="form-label">Nama Pasien</label>
                             <input type="pasien" class="form-control" id="exampleInputPasien" name="pasienApotek"
-                                aria-describedby="pasienHelp">
+                                aria-describedby="pasienHelp"> -->
+                            <label for="catsp" class="form-label">Pasien - Obat</label>
+
+                            <select name="medName" id="catsp" class="form-control">
+                                <?php
+                                foreach ($rp_obat as $obt) {
+                                    $id_rkm = $obt['id_rekam_medis'];
+                                    $rkm = view_data("SELECT * FROM rekam_medis WHERE `id_rekam_medis` = $id_rkm")[0];
+                                    $id_usr = $rkm['id_user'];
+                                    $pgn = view_data("SELECT * FROM pengguna WHERE `id_user` = $id_usr")[0];
+                                ?>
+                                    <option value="<?= $obt['id_resep_obat'] ?>"><?= $pgn['nama_lengkap'] ?> - <?= $obt['daftar_obat'] ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
                         </div>
 
                     </form>
                     <!--Form-->
                 </div>
                 <div class="col-sm">
-                
+
                 </div>
             </div>
         </div>
@@ -106,9 +117,8 @@ $pggn = view_data("SELECT * FROM pengguna");
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+    </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

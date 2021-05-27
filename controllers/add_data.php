@@ -9,6 +9,12 @@ if(isset($_POST["daftar_akun"])){
 }
 
 // tambah dokter
+if(isset($_POST["add_apotek"])){
+    $_SESSION['eff_add'] = insert_apotek($_POST);
+    header("Location: ../views/admins/adminApotek.php");
+}
+
+// tambah dokter
 if(isset($_POST["add_dokter"])){
     $_SESSION['eff_add'] = insert_dokter($_POST, '');
     header("Location: ../views/admins/adminDokter.php");
@@ -25,6 +31,32 @@ if(isset($_POST["add_poli"])){
     $_SESSION['eff_add'] = insert_poli($_POST);
     // header("Location: ../views/admins/adminRumahSakit.php");
     header("Location: ../views/admins/adminPoliklinik.php?id_rs=".$_POST['id_rs_hid']);
+}
+
+function insert_apotek($data){
+    global $conn;
+    // $rs_row = view_data("SELECT * FROM `list_dokter`");
+    $insert_stmt = '';
+    $query = '';
+
+    $id_aptk = date("m").strval(rand(100,999)).date("Y").date("H").date("d").date("i");
+    $nama = $data['namaApotek'];
+    $alamat = $data['alamatApotek'];
+    $telepon = $data['telpApotek'];
+    $id_obat = $data['medName'];
+    $query = "INSERT INTO `apotek` VALUES (?,?,?,?,?)";
+
+    $insert_stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($insert_stmt,'isssi', $id_aptk, $nama, $alamat, $telepon, $id_obat);
+
+    if(!empty($insert_stmt)){
+        mysqli_stmt_execute($insert_stmt);
+    }else{var_dump('gagal');}
+
+    $eff_rw = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    
+    return $eff_rw;
 }
 
 function insert_dokter($data, $user_id){
