@@ -70,7 +70,6 @@
     <!-- Content -->
     <div class="container pt-4 mt-4">
         <div class="row pt-5 pr-3 pl-3">
-            <!-- <h1>Hello, world!</h1> -->
             <br>
         </div>
 
