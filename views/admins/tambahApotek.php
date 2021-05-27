@@ -1,3 +1,9 @@
+<?php
+require '../../controllers/select_data.php';
+$rp_obat = view_data("SELECT * FROM resep_obat");
+$rk_medis = view_data("SELECT * FROM rekam_medis");
+$pggn = view_data("SELECT * FROM pengguna");
+?>
 <!doctype html>
 <html lang="en">
 
@@ -20,36 +26,43 @@
     <div class="container">
         <font color=white>
             <div class="d-flex justify-content-between">
-                <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                     &nbsp;&nbsp;&nbsp;
-                    <img src="logo.png" width="60" alt="">
+                    <a class="navbar-brand" href="">
+                        <img src="../../storages/gambar/logo.png" width="60" alt="ANTRI.IN">
+                    </a>
                     <div class="collapse navbar-collapse nav justify-content-center" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <h4>Tambahkan Data Apotek</h4>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="">
+                                    <h4>Tambahkan Data Apotek</h4>
+                                </a>
                             </li>
                         </ul>
                     </div>
-                    <button type="button" class="btn btn-danger">Cancel</button>
+                    <a href="adminApotek.php" type="button" class="btn btn-danger">Cancel</a>
                     &nbsp;&nbsp;
-                    <button type="button" class="btn btn-primary">Simpan</button>
-                    &nbsp;&nbsp;
+                    <!--Form-->
+                    <form action="../../controllers/add_data.php" method="POST">
+                        <input type="submit" class="btn btn-primary" value="Simpan" name="add_apotek"></input>
+                        &nbsp;&nbsp;
                 </nav>
         </font>
     </div>
     </div>
-    <!--Navbar-->
+
+    <!--content-->
     <br><br><br><br>
     <div class="container" style="background-color: white; border-radius: 7px;">
         <center>
-            <img src="logo2.png" width="500px">
+            <img src="../../storages/gambar/logo2.png" width="500px">
         </center>
         <!--Grid-->
         <div class="container">
             <div class="row">
                 <div class="col-sm">
                     <center>
-                        <img src="apotek.jpg" width="325">
+                        <img src="../../storages/gambar/apotek.jpg" width="325">
                     </center>
                 </div>
                 <div class="col-sm">
@@ -58,18 +71,23 @@
 
                         <div class="mb-3">
                             <label for="exampleInputNama" class="form-label">Nama Apotek</label>
-                            <input type="nama" class="form-control" id="exampleInputNama"
+                            <input type="nama" class="form-control" id="exampleInputNama" name="namaApotek"
                                 aria-describedby="namaHelp">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputAlamat" class="form-label">Alamat</label>
-                            <input type="alamat" class="form-control" id="exampleInputAlamat"
+                            <input type="alamat" class="form-control" id="exampleInputAlamat" name="alamatApotek"
                                 aria-describedby="alamatHelp">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputTelp" class="form-label">No Telepon</label>
-                            <input type="telp" class="form-control" id="exampleInputTelp"
+                            <input type="telp" class="form-control" id="exampleInputTelp" name="telpApotek"
                                 aria-describedby="telpHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPasien" class="form-label">Nama Pasien</label>
+                            <input type="pasien" class="form-control" id="exampleInputPasien" name="pasienApotek"
+                                aria-describedby="pasienHelp">
                         </div>
 
                     </form>

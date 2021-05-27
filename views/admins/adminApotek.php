@@ -108,7 +108,7 @@ $_SESSION['eff_del_one'] = -1;
         <div class="card text-dark bg-light my-5" style="max-width: 100%;">
             <div class="card-header">
                 <div class="row justify-content-between ml-2 mr-2">.
-                    <a class="btn btn-success" href="tambahDokter.html">
+                    <a class="btn btn-success" href="tambahApotek.php">
                         Tambahkan Apotek baru
                         <!-- <span class="sr-only">(current)</span> -->
                     </a>
