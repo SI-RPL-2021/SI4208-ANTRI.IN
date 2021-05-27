@@ -74,7 +74,7 @@
         </div>
 
         <?php
-        // alert register
+        // alert login
         if (!empty($_SESSION['eff_add'])) {
             if ($_SESSION['eff_add'] > 0) {
                 $_SESSION['eff_add'] = -1;
