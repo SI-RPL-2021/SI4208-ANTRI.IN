@@ -37,7 +37,7 @@ $_SESSION['eff_del_one'] = -1;
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Apotek</a>
+                        <a class="nav-link" href="adminApotek.php">Apotek</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="">Dokter</a>
@@ -106,7 +106,7 @@ $_SESSION['eff_del_one'] = -1;
             <div class="card-header">
                 <div class="row justify-content-between ml-2 mr-2">.
                     <a class="btn btn-success" href="tambahDokter.html">
-                        Tambahkan dokter baru
+                        Tambahkan Dokter baru
                         <!-- <span class="sr-only">(current)</span> -->
                     </a>
                 </div>

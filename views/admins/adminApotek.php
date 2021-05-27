@@ -1,4 +1,6 @@
-<?php
+<?php require '../../controllers/select_data.php';
+$result = view_data("SELECT * FROM apotek");
+
 $_SESSION['eff_add'] = -1;
 $_SESSION['eff_edit'] = -1;
 $_SESSION['eff_del_one'] = -1;
@@ -18,106 +20,148 @@ $_SESSION['eff_del_one'] = -1;
     <title>Admin | Apotek</title>
 
     <link rel="icon" href="../../storages/gambar/logo.png" type="image/png" sizes="128x128">
+
+    <!-- Datatable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
 </head>
 
 <body style="background-color: rgb(181, 240, 181);">
 
     <!--Navbar-->
-    <ul class="nav justify-content-center" style="background-color: rgb(143, 219, 143);">
-        <li class="nav-item">
-            <a class="nav-link login" href="#">
-                <font color=black>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                     <b>Apotek</b>
-                </font>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link regis" aria-current="page" href="#">
-                <font color=black>Dokter</font>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link regis" aria-current="page" href="#">
-                <font color=black>Pasien</font>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link login" href="#">
-                <font color=black>Rumah Sakit
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Halo, Admin
-                </font>
-            </a>
-        </li>
-    </ul>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgb(143, 219, 143);">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Apotek</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="adminDokter.php">Dokter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="adminPengguna.php">Pasien</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="adminRumahSakit.php">Rumah Sakit</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav d-flex">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Hi, <?= $_SESSION['log_uname'] ?>
+                        </a>
 
-    <br><br>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="../../controllers/db_connnect.php?out_log=zft"
+                                    onmouseover="this.style.color='red';" onmouseout="this.style.color='';">Log out</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <!--Container body-->
-    <div class="container" style="background-color: white;">
+    <div class="container pt-5" style="background-color: white;">
         <br>
         <h1>DATA APOTEK</h1>
-        <br>
+
+        <?php
+        // alert edit data
+        if ($_SESSION['eff_add'] > 0 or $_SESSION['eff_edit'] > 0 or $_SESSION['eff_del_one'] > 0) {
+            $_SESSION['eff_add'] = -1;
+            $_SESSION['eff_del_one'] = -1;
+            $_SESSION['eff_edit'] = -1;
+        ?>
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Berhasil mengubah data apotek
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+            // unset($_SESSION['eff_add']);
+        } else if ($_SESSION['eff_add'] == 0) {
+            $_SESSION['eff_add'] = -1;
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Gagal mengubah data apotek!!!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+            // unset($_SESSION['eff_add']);
+        }
+        ?>
+
+        <div class="card text-dark bg-light my-5" style="max-width: 100%;">
+            <div class="card-header">
+                <div class="row justify-content-between ml-2 mr-2">.
+                    <a class="btn btn-success" href="tambahDokter.html">
+                        Tambahkan Apotek baru
+                        <!-- <span class="sr-only">(current)</span> -->
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="table_aptk" class="table table-hover table-striped table-bordered table-light" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nomor</th>
+                            <th scope="col">Nama Apotek</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">No Telepon</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no_aptk = 1;
+                        foreach ($result as $item) { ?>
+                            <tr>
+                                <td><?php echo $no_aptk ?></td>
+                                <td><?php echo $item['nama_apotek'] ?></td>
+                                <td><?php echo $item['alamat_apotek'] ?></td>
+                                <td><?php echo $item['no_telepon_apotek'] ?></td>
+                                <td>
+                                    <!-- <a href="editDokter.php?id_dok=<?= $item['id_dokter'] ?>" type="button" class="btn btn-primary">Edit</a>
+                                    <a href="../../controllers/del_data.php?delp=<?= $item['id_dokter'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a> -->
+                                </td>
+                            </tr>
+                        <?php $no_aptk += 1;
+                        } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <br>
-    <div class="container" style="background-color: white; border-radius: 6px;">
-        <br>
-        <a href="tambahApotek.html">Tambahkan Apotek</a>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Nomor</th>
-                    <th scope="col">Nama Apotek</th>
-                    <th scope="col">Alamat</th>
-                    <th scope="col">No Telepon</th>
-                    <th scope="col">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-               
-            </tbody>
-        </table>
-    </div>
 
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+    </script>
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-    -->
+    <!-- Datatable -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#table_aptk').DataTable();
+        });
+    </script>
 </body>
 
 </html>
