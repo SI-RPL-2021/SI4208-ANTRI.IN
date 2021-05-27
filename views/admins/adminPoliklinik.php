@@ -7,6 +7,10 @@ if (isset($_GET['id_rs'])) {
     $rs_res = view_data("SELECT * FROM rumah_sakit WHERE id_rs=$id_num")[0];
     $_SESSION['id_no'] = $id_num;
 }
+
+$_SESSION['eff_add'] = -1;
+$_SESSION['eff_edit'] = -1;
+$_SESSION['eff_del_one'] = -1;
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,6 +24,8 @@ if (isset($_GET['id_rs'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
     <title>Admin | Data Poliklinik</title>
+
+    <link rel="icon" href="../../storages/gambar/logo.png" type="image/png" sizes="128x128">
 </head>
 
 <body style="background-color: rgb(181, 240, 181);">

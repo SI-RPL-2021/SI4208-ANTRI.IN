@@ -1,5 +1,9 @@
 <?php require '../../controllers/select_data.php';
 $result = view_data("SELECT * FROM rumah_sakit");
+
+$_SESSION['eff_add'] = -1;
+$_SESSION['eff_edit'] = -1;
+$_SESSION['eff_del_one'] = -1;
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,6 +23,8 @@ $result = view_data("SELECT * FROM rumah_sakit");
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
 
     <title>Admin | Rumah Sakit</title>
+
+    <link rel="icon" href="../../storages/gambar/logo.png" type="image/png" sizes="128x128">
 </head>
 
 <body style="background-color: rgb(181, 240, 181);">

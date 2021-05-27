@@ -1,3 +1,8 @@
+<?php
+$_SESSION['eff_add'] = -1;
+$_SESSION['eff_edit'] = -1;
+$_SESSION['eff_del_one'] = -1;
+?>
 <!doctype html>
 <html lang="en">
 
@@ -11,6 +16,8 @@
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
     <title>Admin | Apotek</title>
+
+    <link rel="icon" href="../../storages/gambar/logo.png" type="image/png" sizes="128x128">
 </head>
 
 <body style="background-color: rgb(181, 240, 181);">
