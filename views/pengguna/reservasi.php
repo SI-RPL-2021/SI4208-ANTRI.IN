@@ -5,6 +5,11 @@ $rsv_res = view_data("SELECT * FROM list_dokter WHERE id_dokter = '$id_rsv'")[0]
 $rsv_usr = view_data("SELECT * FROM akun WHERE username = '$usr_rsv'")[0];
 $id_akun_rsv = $rsv_usr['id_akun'];
 $rsv_usr = view_data("SELECT * FROM pengguna WHERE id_akun = '$id_akun_rsv'")[0];
+
+$poli_rsv = view_data("SELECT * FROM poliklinik WHERE id_dokter = '$id_rsv'")[0];
+$rs_poli = $poli_rsv['id_rs'];
+
+$hsp_rsv = view_data("SELECT * FROM rumah_sakit WHERE id_rs = '$rs_poli'")[0];
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,7 +22,7 @@ $rsv_usr = view_data("SELECT * FROM pengguna WHERE id_akun = '$id_akun_rsv'")[0]
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-    <title>Reservasi Rumah Sakit</title>
+    <title>Reservasi Online</title>
 
     <link rel="icon" href="../../storages/gambar/logo.png" type="image/png" sizes="128x128">
 </head>
@@ -97,15 +102,18 @@ $rsv_usr = view_data("SELECT * FROM pengguna WHERE id_akun = '$id_akun_rsv'")[0]
                         $today = new Datetime();
                         $diff = $today->diff($bday);
 
-                        $addkkk = $_COOKIE['line_number'] + 1; 
+                        $addkkk = $_COOKIE['line_number'] + 1;
+                        $_SESSION['usr_id_rsvp'] = $rsv_usr['id_user'];
+                        $_SESSION['dok_id_rsvp'] = $id_rsv;
+                        $_SESSION['rs_id_rsvp'] = $hsp_rsv['id_rs'];
                         // $dateOfBirth = $rsv_usr['tanggal_lahir'];
                         // $today = date("Y-m-d");
                         // $diff = date_diff(date_create($dateOfBirth), date_create($today));
                         ?>
                         <label for="inputusia" class="col-sm-2 col-form-label">Usia</label>
                         <div class="col-sm-10" style="border-radius: 12px;">
-                        <input type="usia" class="form-control" id="inputusia" value="<?= $diff->y ?> tahun" disabled>
-                        <!-- <input type="usia" class="form-control" id="inputusia" value="<?= $addkkk ?> tahun" disabled> -->
+                            <input type="usia" class="form-control" id="inputusia" value="<?= $diff->y ?> tahun" disabled>
+                            <!-- <input type="usia" class="form-control" id="inputusia" value="<?= $addkkk ?> tahun" disabled> -->
                             <!-- <input type="usia" class="form-control" id="inputusia" value="<?= $diff->format('%y') ?> tahun" disabled> -->
                         </div>
                     </div>
@@ -150,17 +158,9 @@ $rsv_usr = view_data("SELECT * FROM pengguna WHERE id_akun = '$id_akun_rsv'")[0]
         <br>
     </div>
 
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-    -->
 </body>
 
 </html>

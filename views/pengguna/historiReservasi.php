@@ -27,8 +27,8 @@ $result = view_data("SELECT * FROM reservasi WHERE id_user='$id_rsvp'");
 
 <body style="background-color: rgb(181, 240, 181);">
 
-     <!--Navbar-->
-     <div class="d-flex justify-content-between">
+    <!--Navbar-->
+    <div class="d-flex justify-content-between">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="">
@@ -94,7 +94,8 @@ $result = view_data("SELECT * FROM reservasi WHERE id_user='$id_rsvp'");
                 <table id="table_rsvp" class="table table-hover table-striped table-bordered table-light" style="width:100%">
                     <thead>
                         <tr>
-                            <th scope="col">Kode Reservasi</th></th>
+                            <th scope="col">Kode Reservasi</th>
+                            </th>
                             <th scope="col">Nomor Antrian</th>
                             <th scope="col">Dokter</th>
                             <th scope="col">Rumah Sakit</th>
@@ -107,13 +108,13 @@ $result = view_data("SELECT * FROM reservasi WHERE id_user='$id_rsvp'");
                             $id_rs = $item['id_rs'];
                             $dok_rsvp = view_data("SELECT * FROM list_dokter WHERE id_dokter='$id_dok'")[0];
                             $rs_rsvp = view_data("SELECT * FROM rumah_sakit WHERE id_rs='$id_rs'")[0];
-                            ?>
+                        ?>
                             <tr>
                                 <td><?php echo $item['id_reservasi'] ?></td>
                                 <td><?php echo $item['nomor_antrian'] ?></td>
                                 <td><?php echo $dok_rsvp['nama_dokter'] ?></td>
                                 <td>
-                                <?php echo $rs_rsvp['nama_rs'] ?>
+                                    <?php echo $rs_rsvp['nama_rs'] ?>
                                     <!-- <a href="editPengguna.php?id_usr=<?= $item['id_user'] ?>" type="button" class="btn btn-primary">Edit</a>
                                     <a href="../../controllers/del_data.php?delsr=<?= $item['id_user'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a> -->
                                 </td>

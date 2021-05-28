@@ -15,17 +15,54 @@ function view_data($query){
     return $rows;
 }
 
+function insert_reservasi($data){
+    global $conn;
+    // $rs_row = view_data("SELECT * FROM `list_dokter`");
+    $insert_stmt = '';
+    $query = '';
+
+    $id_rsvp = date("Y").date("m").date("d").date("H").date("i").strval(rand(100,999));
+    $no_antrian = $_SESSION['line_number'];
+    $id_usr = $_SESSION['usr_id_rsvp'];
+    $id_dok = $_SESSION['dok_id_rsvp'];
+    $id_rs = $_SESSION['rs_id_rsvp'];
+    $query = "INSERT INTO `reservasi` VALUES (?,?,?,?,?)";
+
+    $insert_stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($insert_stmt,'isiii', $id_rsvp, $no_antrian, $id_usr, $id_dok, $id_rs);
+
+    if(!empty($insert_stmt)){
+        mysqli_stmt_execute($insert_stmt);
+    }else{var_dump('gagal');}
+
+    $eff_rw = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    
+    return $eff_rw;
+}
+
 //antrian
 if (isset($_POST["get_antrian"])) {
     if(!empty($_SESSION['line_number'])){
         $_SESSION['line_number'] = $_SESSION['line_number'] + 1;
+        $_SESSION['eff_add'] = insert_reservasi($_POST);
+        unset($_SESSION['usr_id_rsvp']);
+        unset($_SESSION['dok_id_rsvp']);
+        unset($_SESSION['rs_id_rsvp']);
         header("Location: ../views/pengguna/historiReservasi.php");
     }
     else if(!empty($_COOKIE['line_number'])){
         $_SESSION['line_number'] = $_COOKIE['line_number'] + 1;
+        $_SESSION['eff_add'] = insert_reservasi($_POST);
+        unset($_SESSION['usr_id_rsvp']);
+        unset($_SESSION['dok_id_rsvp']);
+        unset($_SESSION['rs_id_rsvp']);
         header("Location: ../views/pengguna/historiReservasi.php"); 
     } else {
         $_COOKIE['line_number'] = -1;
+        unset($_SESSION['usr_id_rsvp']);
+        unset($_SESSION['dok_id_rsvp']);
+        unset($_SESSION['rs_id_rsvp']);
         header("Location: ../views/pengguna/dokterList.php"); 
     }
 }
@@ -86,4 +123,3 @@ if (isset($_POST["sign_in"])) {
 
     // setcookie("username", $username, time()+ 86400,'/');
 }
-?>
