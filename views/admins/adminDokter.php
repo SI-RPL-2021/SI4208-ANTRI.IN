@@ -56,8 +56,8 @@ $_SESSION['eff_del_one'] = -1;
                         </a>
 
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">///////\\\\\\\</a></li>
+                            <li><a class="dropdown-item" href="#">\\\\\\\///////</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -135,9 +135,9 @@ $_SESSION['eff_del_one'] = -1;
                                 <td><?php echo $item['no_telepon'] ?></td>
                                 <td>
                                     <!-- <form action="add.php" method="post">
-                  <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
-                  <button class="btn btn-light" type="submit">Edit</button>
-                  <button class="btn btn-danger btnDelete" type="button" data-id="<?php echo $item['id'] ?>">Delete</button>
+                <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
+                <button class="btn btn-light" type="submit">Edit</button>
+                <button class="btn btn-danger btnDelete" type="button" data-id="<?php echo $item['id'] ?>">Delete</button>
                 </form> -->
                                     <a href="editDokter.php?id_dok=<?= $item['id_dokter'] ?>" type="button" class="btn btn-primary">Edit</a>
                                     <a href="../../controllers/del_data.php?delp=<?= $item['id_dokter'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a>

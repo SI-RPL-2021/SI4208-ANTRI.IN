@@ -65,7 +65,7 @@ $result = view_data("SELECT * FROM rumah_sakit");
 
     <!--Container body-->
     <br><br><br>
-    <div class="container pt-2 mt-2 text-center" style="background-color: white; border-radius: 20px;">
+    <div class="container pt-2 mt-2 text-center" style="background-color: white; border-radius: 10px;">
         <br>
         <h1>Temukan Rumah Sakit yang Tepat</h1>
         <h7>Cari dan temukan rumah sakit yang tepat untuk kebutuhan medis</h7>
