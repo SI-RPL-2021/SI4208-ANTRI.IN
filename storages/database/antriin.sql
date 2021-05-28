@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2021 at 11:23 AM
+-- Generation Time: May 28, 2021 at 09:29 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -58,7 +58,8 @@ CREATE TABLE `akun` (
 --
 
 INSERT INTO `akun` (`id_akun`, `username`, `password`, `email`) VALUES
-(4280444697, 'user02', '$2y$10$wPn3I/wbVT41KFHMwnH4COXs/W8gJG77uxeY8KOonyZ/UiZA2O6Nq', 'jskd@hhjsks.com');
+(4280444697, 'user02', '$2y$10$wPn3I/wbVT41KFHMwnH4COXs/W8gJG77uxeY8KOonyZ/UiZA2O6Nq', 'jskd@hhjsks.com'),
+(5280242586, 'user01', '$2y$10$vAi95tifZO855LLViKkLvuaMp6UgcV2reRPaNC1jodOO01mznQiGa', 'abcjjs@antri.in');
 
 -- --------------------------------------------------------
 
@@ -73,6 +74,14 @@ CREATE TABLE `apotek` (
   `no_telepon_apotek` varchar(20) NOT NULL,
   `id_resep_obat` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `apotek`
+--
+
+INSERT INTO `apotek` (`id_apotek`, `nama_apotek`, `alamat_apotek`, `no_telepon_apotek`, `id_resep_obat`) VALUES
+(51722021012851, 'Jaya Farma Sejahtera', 'Jalan Flamboyan No.35', '03892 320023', 202190522891),
+(58712021022832, 'Vita CImin', 'jalan merdeka raya,', '343434', 202190522891);
 
 -- --------------------------------------------------------
 
@@ -94,9 +103,9 @@ CREATE TABLE `list_dokter` (
 INSERT INTO `list_dokter` (`id_dokter`, `nama_dokter`, `spesialis`, `no_telepon`) VALUES
 (202104281210534, 'Rachel', 'Kandungan', '920023203'),
 (202104281360554, 'Mark', 'Penyakit dalam', '0892382399'),
-(202104281730631, 'Thorston', 'Ortopedi', '0882993434'),
+(202104281730631, 'Thorston', 'Gigi', '0882993434'),
 (202104283540553, 'Lisa', 'Anak', '39393939'),
-(202104284320535, 'George', 'THT', '343434');
+(202104284320535, 'George', 'Anak', '343434');
 
 -- --------------------------------------------------------
 
@@ -120,7 +129,8 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id_user`, `nama_lengkap`, `no_ktp`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `no_telepon`, `id_akun`) VALUES
-(202104280444361, 'User kedua bernama siapa', '939933112922', '2021-04-07', 'laki-laki', 'jalan raya kebun jati', '082993293', 4280444697);
+(202104280444361, 'Melisha', '939933112922', '1990-04-07', 'wanita', 'jalan raya kebun jati', '082993293', 4280444697),
+(202105280242775, 'Selena', '999920003403033', '1993-06-18', 'Wanita', 'Jalan raya museum', '083929323', 5280242586);
 
 -- --------------------------------------------------------
 
@@ -142,7 +152,11 @@ CREATE TABLE `poliklinik` (
 
 INSERT INTO `poliklinik` (`id_poli`, `nama_poli`, `jadwal_buka`, `id_dokter`, `id_rs`) VALUES
 (42810496202121, 'Sehat dimulai dari dalam diri', '15:00-23:00', 202104281360554, 42820210835905),
-(42810520202120, 'Spesialis Kandungan Sejahtera', '08:00-12:00', 202104281210534, 42820210835905);
+(42810520202120, 'Spesialis Kandungan Sejahtera', '08:00-12:00', 202104281210534, 42820210835905),
+(52803201202105, 'Umum', '10:00-20:00', 202104281730631, 52820210336702),
+(52803402202104, 'Cinta Ibu Anak', '14:00-21:00', 202104281210534, 52820210317903),
+(52803663202104, 'Gigi dan Gusi', '08:00-17:00', 202104284320535, 52820210336702),
+(52803950202105, 'Psikiater Demi Hidup Bahagia', '11:00-19:00', 202104283540553, 52820210336702);
 
 -- --------------------------------------------------------
 
@@ -159,6 +173,13 @@ CREATE TABLE `rekam_medis` (
   `diagnosis` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `rekam_medis`
+--
+
+INSERT INTO `rekam_medis` (`id_rekam_medis`, `id_user`, `id_rs`, `id_reservasi`, `keluhan`, `diagnosis`) VALUES
+(202105892287, 202104280444361, 42820210835905, 20217830528, 'Sakit Hati', 'Kelihatan Depresi');
+
 -- --------------------------------------------------------
 
 --
@@ -170,6 +191,13 @@ CREATE TABLE `resep_obat` (
   `id_rekam_medis` bigint(20) NOT NULL,
   `daftar_obat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `resep_obat`
+--
+
+INSERT INTO `resep_obat` (`id_resep_obat`, `id_rekam_medis`, `daftar_obat`) VALUES
+(202190522891, 202105892287, 'Air Putih; ...');
 
 -- --------------------------------------------------------
 
@@ -184,6 +212,15 @@ CREATE TABLE `reservasi` (
   `id_dokter` bigint(20) NOT NULL,
   `id_rs` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reservasi`
+--
+
+INSERT INTO `reservasi` (`id_reservasi`, `nomor_antrian`, `id_user`, `id_dokter`, `id_rs`) VALUES
+(20217830528, '56', 202104280444361, 202104283540553, 42820210835905),
+(202105280923158, '10', 202105280242775, 202104281210534, 42820210835905),
+(202105280923207, '11', 202105280242775, 202104283540553, 52820210336702);
 
 -- --------------------------------------------------------
 
@@ -203,7 +240,10 @@ CREATE TABLE `rumah_sakit` (
 --
 
 INSERT INTO `rumah_sakit` (`id_rs`, `nama_rs`, `alamat_rs`, `no_telepon_rs`) VALUES
-(42820210835905, 'Medica Husada Bakti Jaya', 'jalan Jenderal Sudirman', '98394 39390023');
+(42820210835905, 'Medica Husada Bakti Jaya', 'Jalan Jenderal Sudirman No.829', '98394 39390023'),
+(52820210317903, 'Permata Hati Cemerlang', 'Jalan Raden Sanjaya No.2003', '823 29191032'),
+(52820210336702, 'Dr. Djatiwibowo Healthcare', 'Jalan Pegangsaan No.111', '8299 32993934'),
+(52820210376408, 'Dr. Kanuragan Sehati', 'Jalan Medical Check Up No.2930', '782 28919392');
 
 --
 -- Indexes for dumped tables
