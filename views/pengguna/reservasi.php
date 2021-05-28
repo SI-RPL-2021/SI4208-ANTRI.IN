@@ -1,4 +1,7 @@
-<?php require_once '../../controllers/select_data.php' ?>
+<?php require_once '../../controllers/select_data.php';
+$id_rsv = $_GET['id_dok_rsv'];
+$rsv_res = view_data("SELECT * FROM list_dokter WHERE id_dokter = '$id_rsv'")[0];
+?>
 <!doctype html>
 <html lang="en">
 
@@ -18,53 +21,39 @@
 <body style="background-color: rgb(181, 240, 181);">
 
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgb(143, 219, 143);">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Apotek</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Cari Dokter</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Rumah Sakit</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav d-flex">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Hi, <?= $_SESSION['log_uname'] ?>
-                        </a>
-
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="editProfile.php">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="../../controllers/db_connnect.php?out_log=zft" onmouseover="this.style.color='red';" onmouseout="this.style.color='';">Log out</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                &nbsp;&nbsp;&nbsp;
+                <a class="navbar-brand" href="">
+                    <img src="../../storages/gambar/logo.png" width="60" alt="">
+                </a>
+                <div class="collapse navbar-collapse nav justify-content-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link active" aria-current="page" href="">
+                                <h4>Reservasi Dokter</h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="dokterList.php" type="button" class="btn btn-danger">Cancel</a>
+                &nbsp;&nbsp;
+                <!--Form-->
+                <form action="../../controllers/edit_data.php" method="POST">
+                    <input type="submit" class="btn btn-primary" value="Reservasi" name="edit_apotek"></input>
+                    <!-- <input type="hidden" name="id_apk_hid" value="<?= $result['id_'] ?>"></input> -->
+                    &nbsp;&nbsp;
+            </nav>
         </div>
-    </nav>
+    </div>
 
     <!--Container body-->
-    <div class="container pt-5 mt-5" style="background-color: white; border-radius: 5%;">
-        <br><br><br>
-        <h2>
-            <center>Reservasi Dokter</center>
-        </h2>
+    <br><br><br><br><br>
+    <div class="container" style="background-color: white; border-radius: 5%;">
+        <br>
         <!--Grid-->
-        <br><br><br><br>
+        <br><br>
         <div class="container">
             <div class="row">
                 <div class="col-sm">
@@ -72,29 +61,62 @@
                         <img src="../../storages/gambar/cwe.png" style="width: 250px;">
                     </center>
                 </div>
-                <div class="col-sm">
+                <!--container-->
+                <div class="col-sm" style="background-color: rgb(143, 219, 143); border-radius: 15px;">
                     <br><br>
-                    <center>
-                        <form action="">
-                            <h4>Pilih Spesialis</h4>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Pilih</option>
-                                <option value="1">Jantung</option>
-                                <option value="2">Mata</option>
-                                <option value="3">Tulang</option>
-                            </select>
-                            <br>
-                            <h4>Pilih Dokter</h4>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Pilih</option>
-                                <option value="1">dr.Hendro</option>
-                                <option value="2">dr.Jarot</option>
-                                <option value="3">dr.Kusnad</option>
-                            </select>
-                        </form>
-                    </center>
-
+                    <table style="margin-left: 10px;">
+                        <tr>
+                            <td>Dokter</td>
+                            <td>&nbsp;&nbsp;&nbsp; : </td>
+                            <td>&nbsp;&nbsp;&nbsp;Dr. <?= $rsv_res['nama_dokter'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Spesialis</td>
+                            <td>&nbsp;&nbsp;&nbsp; : </td>
+                            <td>&nbsp;&nbsp;&nbsp;<?= $rsv_res['spesialis'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>No.Hp</td>
+                            <td>&nbsp;&nbsp;&nbsp; : </td>
+                            <td>&nbsp;&nbsp;&nbsp;<?= $rsv_res['no_telepon'] ?></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <div class="container" style="background-color: rgb(4, 71, 4);">
+                        <h6>
+                            <center>
+                                <font color=white><b>P A S I E N</b></font>
+                            </center>
+                        </h6>
+                    </div>
+                    <br>
+                    <div class="mb-3 row">
+                        <label for="inputnama" class="col-sm-2 col-form-label">Nama</label>
+                        <div class="col-sm-10" style="border-radius: 12px;">
+                            <input type="nama" class="form-control" id="inputnama">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputusia" class="col-sm-2 col-form-label">Usia</label>
+                        <div class="col-sm-10" style="border-radius: 12px;">
+                            <input type="usia" class="form-control" id="inputusia">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputalamat" class="col-sm-2 col-form-label">Alamat</label>
+                        <div class="col-sm-10" style="border-radius: 12px;">
+                            <input type="alamat" class="form-control" id="inputalamat">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputnohp" class="col-sm-2 col-form-label">No.Hp</label>
+                        <div class="col-sm-10" style="border-radius: 12px;">
+                            <input type="nohp" class="form-control" id="inputnohp">
+                        </div>
+                    </div>
+                    </form>
                 </div>
+                <!--akhir container-->
                 <div class="col-sm">
                     <center>
                         <img src="../../storages/gambar/cwo.png" style="width: 250px;">
@@ -103,7 +125,7 @@
             </div>
         </div>
         <!--akhir grid-->
-        <br><br><br><br><br><br><br><br>
+        <br><br><br>
     </div>
 
 
