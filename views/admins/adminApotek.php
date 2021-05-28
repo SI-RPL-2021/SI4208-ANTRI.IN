@@ -132,7 +132,7 @@ $_SESSION['eff_del_one'] = -1;
                                 <td><?php echo $item['alamat_apotek'] ?></td>
                                 <td><?php echo $item['no_telepon_apotek'] ?></td>
                                 <td>
-                                    <!-- <a href="editDokter.php?id_dok=<?= $item['id_dokter'] ?>" type="button" class="btn btn-primary">Edit</a> -->
+                                    <a href="editApotek.php?id_apk=<?= $item['id_apotek'] ?>" type="button" class="btn btn-primary">Edit</a>
                                     <a href="../../controllers/del_data.php?delptk=<?= $item['id_apotek'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a>
                                 </td>
                             </tr>

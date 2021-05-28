@@ -29,32 +29,33 @@ $sltcd = '';
 <body style="background-color: rgb(181, 240, 181);">
     <!--Navbar-->
     <div class="container">
-            <div class="d-flex justify-content-between">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-                    &nbsp;&nbsp;&nbsp;
-                    <a class="navbar-brand" href="">
-                        <img src="../../storages/gambar/logo.png" width="60" alt="ANTRI.IN">
-                    </a>
-                    <div class="collapse navbar-collapse nav justify-content-center" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link active" aria-current="page" href="">
-                                    <h4>Edit Data Poliklinik</h4>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <a href="adminPoliklinik.php?id_rs=<?= $result['id_rs'] ?>" type="button" class="btn btn-danger">Cancel</a>
+        <div class="d-flex justify-content-between">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                &nbsp;&nbsp;&nbsp;
+                <a class="navbar-brand" href="">
+                    <img src="../../storages/gambar/logo.png" width="60" alt="ANTRI.IN">
+                </a>
+                <div class="collapse navbar-collapse nav justify-content-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link active" aria-current="page" href="">
+                                <h4>Edit Data Poliklinik</h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="adminPoliklinik.php?id_rs=<?= $result['id_rs'] ?>" type="button" class="btn btn-danger">Cancel</a>
+                &nbsp;&nbsp;
+                <!--Form-->
+                <form action="../../controllers/edit_data.php" method="POST">
+                    <input type="submit" class="btn btn-primary" value="Simpan" name="edit_poli"></input>
+                    <input type="hidden" name="id_rs_hid" value="<?= $result['id_rs'] ?>"></input>
                     &nbsp;&nbsp;
-                    <!--Form-->
-                    <form action="../../controllers/edit_data.php" method="POST">
-                        <input type="submit" class="btn btn-primary" value="Simpan" name="edit_poli"></input>
-                        <input type="hidden" name="id_rs_hid" value="<?= $result['id_rs'] ?>"></input>
-                        &nbsp;&nbsp;
-                </nav>
+            </nav>
+        </div>
     </div>
-    </div>
-    <!--Navbar-->
+
+    <!--Content-->
     <br><br><br><br>
     <div class="container" style="background-color: white; border-radius: 7px;">
         <center>
@@ -71,27 +72,29 @@ $sltcd = '';
                 <div class="col-sm">
                     <div class="mb-3">
                         <label for="exampleInputNama" class="form-label">Nama Poliklinik</label>
-                        <input type="nama" class="form-control" id="exampleInputNama" aria-describedby="namaHelp" name="namaPoli" value="<?= $result['nama_poli']?>">
+                        <input type="nama" class="form-control" id="exampleInputNama" aria-describedby="namaHelp" name="namaPoli" value="<?= $result['nama_poli'] ?>">
                     </div>
                     <div class="mb-3">
                         <label for="cats" class="form-label">Dokter</label>
                         <select name="drName" id="cats" class="form-control">
-                        <?php
-                        foreach ($dr_res as $dr) {
-                            if($dr['id_dokter'] == $result['id_dokter']){
-                                $sltcd='selected';
-                            }else{$sltcd='';}
-                        ?>
-                            <option value="<?= $dr['id_dokter'] ?>" <?= $sltcd ?> ><?= $dr['nama_dokter'] ?></option>
-                            <!-- <input type="hidden" name="id_dokter_hid" value="<?= $dr['id_dokter'] ?>" class="form-control"></input> -->
-                        <?php
-                        }
-                        ?>
+                            <?php
+                            foreach ($dr_res as $dr) {
+                                if ($dr['id_dokter'] == $result['id_dokter']) {
+                                    $sltcd = 'selected';
+                                } else {
+                                    $sltcd = '';
+                                }
+                            ?>
+                                <option value="<?= $dr['id_dokter'] ?>" <?= $sltcd ?>><?= $dr['nama_dokter'] ?></option>
+                                <!-- <input type="hidden" name="id_dokter_hid" value="<?= $dr['id_dokter'] ?>" class="form-control"></input> -->
+                            <?php
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputJadwal" class="form-label">Jadwal Praktik</label>
-                        <input type="jadwal" class="form-control" id="exampleInputJadwal" aria-describedby="jadwalHelp" name="jadwalPoli" value="<?= $result['jadwal_buka']?>">
+                        <input type="jadwal" class="form-control" id="exampleInputJadwal" aria-describedby="jadwalHelp" name="jadwalPoli" value="<?= $result['jadwal_buka'] ?>">
                     </div>
 
                     </form>

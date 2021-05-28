@@ -65,41 +65,37 @@ $pggn = view_data("SELECT * FROM pengguna");
                     </center>
                 </div>
                 <div class="col-sm">
-                    <!--Form--> <br><br>
-                    <form action="">
-
-                        <div class="mb-3">
-                            <label for="exampleInputNama" class="form-label">Nama Apotek</label>
-                            <input type="nama" class="form-control" id="exampleInputNama" name="namaApotek" aria-describedby="namaHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputAlamat" class="form-label">Alamat</label>
-                            <input type="alamat" class="form-control" id="exampleInputAlamat" name="alamatApotek" aria-describedby="alamatHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputTelp" class="form-label">No Telepon</label>
-                            <input type="telp" class="form-control" id="exampleInputTelp" name="telpApotek" aria-describedby="telpHelp">
-                        </div>
-                        <div class="mb-3">
-                            <!-- <label for="exampleInputPasien" class="form-label">Nama Pasien</label>
+                    <div class="mb-3">
+                        <label for="exampleInputNama" class="form-label">Nama Apotek</label>
+                        <input type="nama" class="form-control" id="exampleInputNama" name="namaApotek" aria-describedby="namaHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputAlamat" class="form-label">Alamat</label>
+                        <input type="alamat" class="form-control" id="exampleInputAlamat" name="alamatApotek" aria-describedby="alamatHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputTelp" class="form-label">No Telepon</label>
+                        <input type="telp" class="form-control" id="exampleInputTelp" name="telpApotek" aria-describedby="telpHelp">
+                    </div>
+                    <div class="mb-3">
+                        <!-- <label for="exampleInputPasien" class="form-label">Nama Pasien</label>
                             <input type="pasien" class="form-control" id="exampleInputPasien" name="pasienApotek"
                                 aria-describedby="pasienHelp"> -->
-                            <label for="catsp" class="form-label">Pasien - Obat</label>
-
-                            <select name="medName" id="catsp" class="form-control">
-                                <?php
-                                foreach ($rp_obat as $obt) {
-                                    $id_rkm = $obt['id_rekam_medis'];
-                                    $rkm = view_data("SELECT * FROM rekam_medis WHERE `id_rekam_medis` = $id_rkm")[0];
-                                    $id_usr = $rkm['id_user'];
-                                    $pgn = view_data("SELECT * FROM pengguna WHERE `id_user` = $id_usr")[0];
-                                ?>
-                                    <option value="<?= $obt['id_resep_obat'] ?>"><?= $pgn['nama_lengkap'] ?> - <?= $obt['daftar_obat'] ?></option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
+                        <label for="catsp" class="form-label">Pasien - Obat</label>
+                        <select name="medName" id="catsp" class="form-control">
+                            <?php
+                            foreach ($rp_obat as $obt) {
+                                $id_rkm = $obt['id_rekam_medis'];
+                                $rkm = view_data("SELECT * FROM rekam_medis WHERE `id_rekam_medis` = $id_rkm")[0];
+                                $id_usr = $rkm['id_user'];
+                                $pgn = view_data("SELECT * FROM pengguna WHERE `id_user` = $id_usr")[0];
+                            ?>
+                                <option value="<?= $obt['id_resep_obat'] ?>"><?= $pgn['nama_lengkap'] ?> - <?= $obt['daftar_obat'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
 
                     </form>
                     <!--Form-->

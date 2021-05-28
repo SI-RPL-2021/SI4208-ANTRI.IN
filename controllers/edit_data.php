@@ -8,6 +8,12 @@ if(isset($_POST["edit_profile"])){
     header("Location: ../views/pengguna/editProfile.php");
 }
 
+// ubah apotek
+if(isset($_POST["edit_apotek"])){
+    $_SESSION['eff_edit'] = update_apotek($_POST, $_SESSION['id_no']);
+    header("Location: ../views/admins/adminApotek.php");
+}
+
 // ubah dokter
 if(isset($_POST["edit_dokter"])){
     $_SESSION['eff_edit'] = update_dokter($_POST, $_SESSION['id_no']);
@@ -53,6 +59,32 @@ function update_profile($data, $id_user){
 
     $update_stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($update_stmt,'ssssssi', $nama, $ktp, $birthday, $gender, $alamat, $phone, $id_user);
+
+    if(!empty($update_stmt)){
+        mysqli_stmt_execute($update_stmt);
+    }else{var_dump('gagal');}
+
+    // mysqli_query($conn, $query);
+    $eff_rw = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    
+    return $eff_rw;
+}
+
+function update_apotek($data, $id_apotek){
+    global $conn;
+    // $rs_row = view_data("SELECT * FROM `list_dokter` WHERE id_dokter='$id_dok'")[0];
+    $update_stmt = '';
+    $query = '';
+
+    $nama = $data['namaApotek'];
+    $alamat = $data['alamatApotek'];
+    $telepon = $data['telpApotek'];
+    $id_obat = $data['medName'];
+    $query = "UPDATE `apotek` SET `nama_apotek`=?, `alamat_apotek`=?, `no_telepon_apotek`=?, `id_resep_obat`=? WHERE `id_apotek`=?";
+
+    $update_stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($update_stmt,'sssii', $nama, $alamat, $telepon, $id_obat, $id_apotek);
 
     if(!empty($update_stmt)){
         mysqli_stmt_execute($update_stmt);
