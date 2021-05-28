@@ -72,8 +72,9 @@ $_SESSION['eff_del_one'] = -1;
 
     <!--Container body-->
     <div class="container pt-5" style="background-color: white;">
-        <br>
-        <h1>DATA PASIEN</h1>
+        <br><a href="" style="text-decoration:none; color:black;">
+            <h1>DATA PASIEN</h1>
+        </a>
 
         <?php
         // alert edit data

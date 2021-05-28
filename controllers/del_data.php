@@ -2,6 +2,13 @@
 require_once 'db_connnect.php';
 require_once 'select_data.php';
 
+// delete apotek
+if(isset($_GET['delptk'])){
+    $prod_id = $_GET['delptk'];
+    $_SESSION['eff_del_one'] = del_data_apotek($prod_id);
+    header("Location: ../views/admins/adminApotek.php");
+}
+
 // delete specific doctor
 if(isset($_GET['delp'])){
     $prod_id = $_GET['delp'];
@@ -28,6 +35,20 @@ if(isset($_GET['delpl'])){
     $prod_id = $_GET['delpl'];
     $_SESSION['eff_del_one'] = del_data_poli($prod_id);
     header("Location: ../views/admins/adminPoliklinik.php?id_rs=".$_GET['id_rs']);
+}
+
+function del_data_apotek($key_item){
+    global $conn;
+
+    $query = "DELETE from `apotek` WHERE `apotek`.`id_apotek` = ?";
+    $del_stmt_one = mysqli_prepare($conn, $query);
+    
+    mysqli_stmt_bind_param($del_stmt_one, 'i', $key_item);
+    mysqli_stmt_execute($del_stmt_one);
+    // var_dump(mysqli_affected_rows($conn));
+    $eff_rw = mysqli_affected_rows($conn);
+    
+    return $eff_rw;
 }
 
 function del_data_dokter($key_item){
@@ -91,20 +112,6 @@ function del_data_pasien($key_item){
     global $conn;
 
     $query = "DELETE from `pengguna` WHERE `pengguna`.`id_user` = ?";
-    $del_stmt_one = mysqli_prepare($conn, $query);
-    
-    mysqli_stmt_bind_param($del_stmt_one, 'i', $key_item);
-    mysqli_stmt_execute($del_stmt_one);
-    // var_dump(mysqli_affected_rows($conn));
-    $eff_rw = mysqli_affected_rows($conn);
-    
-    return $eff_rw;
-}
-
-function del_data_apotek($key_item){
-    global $conn;
-
-    $query = "DELETE from `Apotek` WHERE `Apotek`.`id_apotek` = ?";
     $del_stmt_one = mysqli_prepare($conn, $query);
     
     mysqli_stmt_bind_param($del_stmt_one, 'i', $key_item);
