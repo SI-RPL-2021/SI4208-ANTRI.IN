@@ -68,8 +68,8 @@
     </nav>
 
     <!-- Content -->
-    <div class="container pt-4 mt-4">
-        <div class="row pt-5 pr-3 pl-3">
+    <div class="container pt-4 px-5 mt-4 text-center">
+        <div class="row pt-5 px-5">
             <br>
         </div>
 
@@ -103,7 +103,9 @@
 
             </div>
             <div class="col-md-12" style="background-color: rgb(255, 255, 255); border-radius: 20px;">
-                <img src="../storages/gambar/logo2.png" alt=""><br>
+                <a href="">
+                    <img src="../storages/gambar/logo2.png" alt="">
+                </a><br>
                 <form action="../controllers/select_data.php" method="POST">
                     <div class="row">
                         <div class="form-group col-md-4">
