@@ -142,8 +142,8 @@
                     <!-- <button type="submit" class="btn btn-primary">Cancel</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <input type="submit" class="btn btn-secondary" value="Cancel" data-dismiss="modal"></input> -->
-                    <div class="mb-3 text-center">
-                        <input type="submit" class="btn btn-primary" value="Sign In" name="sign_in"></input>
+                    <div class="mb-3 text-center pt-5">
+                        <input type="submit" class="btn btn-warning" value="Sign In" name="sign_in" style="width:500px;"></input>
                     </div>
                     <div class="mb-3 text-center">
                         Belum punya akun? <a href="registrasi.php">Daftar akun disini</a>
