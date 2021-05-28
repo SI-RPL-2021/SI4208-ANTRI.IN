@@ -45,7 +45,7 @@ if (isset($_SESSION['log_uname'])) {
                         </li>
                     </ul>
                 </div>
-                <a href="reservasi.php" type="button" class="btn btn-danger">Cancel</a>
+                <a href="rumahSakit.php" type="button" class="btn btn-danger">Cancel</a>
                 &nbsp;&nbsp;
                 <!--Form-->
                 <form action="../../controllers/edit_data.php" method="POST">

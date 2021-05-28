@@ -1,5 +1,5 @@
 <?php require_once '../../controllers/select_data.php';
-$result = view_data("SELECT * FROM rumah_sakit");
+$result = view_data("SELECT DISTINCT spesialis FROM list_dokter");
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,7 +12,7 @@ $result = view_data("SELECT * FROM rumah_sakit");
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-    <title>Daftar Rumah Sakit</title>
+    <title>Daftar Dokter</title>
 
     <link rel="icon" href="../../storages/gambar/logo.png" type="image/png" sizes="128x128">
 </head>
@@ -31,10 +31,10 @@ $result = view_data("SELECT * FROM rumah_sakit");
                         <a class="nav-link disabled" href="#">Apotek</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="dokterList.php">Cari Dokter</a>
+                        <a class="nav-link active" aria-current="page" href="">Cari Dokter</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Rumah Sakit</a>
+                        <a class="nav-link" href="rumahSakit.php">Rumah Sakit</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav d-flex">
@@ -65,72 +65,67 @@ $result = view_data("SELECT * FROM rumah_sakit");
 
     <!--Container body-->
     <br><br><br>
-    <div class="container pt-2 mt-2 text-center" style="background-color: white; border-radius: 20px;">
+    <div class="container pt-2 mt-2 text-center" style="background-color: white; border-radius: 10px;">
         <br>
-        <h1>Temukan Rumah Sakit yang Tepat</h1>
-        <h7>Cari dan temukan rumah sakit yang tepat untuk kebutuhan medis</h7>
-        <h7>Anda, dan reservasi dengan mudah</h7>
-        <br><br>
+        <h1>Temukan dokter yang tepat</h1>
         <br>
-
-        <!-- <div class="container">
-            <form action="">
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-3">
-                            <input type="email" class="form-control" id="Cari1" aria-describedby="emailHelp"
-                                placeholder="Lokasi">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mb-3">
-                            <input type="email" class="form-control" id="Cari2" aria-describedby="emailHelp"
-                                placeholder="Nama rumah sakit">
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <button type="cari" class="btn btn-primary">Cari</button>
-            <br><br>
-        </div> -->
+        <h6>cari dan temukan dokter yang tepat untuk kebutuhan medis Anda. </h6>
+        <h6>dan buat janji dengan mudah.</h6>
+        <br>
     </div>
 
     <div class="container pt-2 mt-2" style="background-color: white; border-radius: 6px;">
         <br>
-        <h2>Telusuri Berdasarkan Rumah Sakit</h2>
-        <br>
-        <div class="container text-center justify-content-center">
-            <div class="row">
-                <?php
-                foreach ($result as $rs) {
-                ?>
-                    <div class="col-md-3">
-                        <div class="card" style="width: 18rem;">
-                            <img src="rs.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title"><?= $rs['nama_rs'] ?></h5>
-                                <p class="card-text">Rumah Sakit ini merupakan salah satu layanan kesehatan untuk masyarakat
-                                    sekitar <?= $rs['alamat_rs'] ?>. Masyarakat pun bisa melakukan berobat rutin dan rawat inap di rumah
-                                    sakit ini. Memiliki beberapa poliklinik dan dokter spesialis.</p>
-                                <a href="#" class="btn btn-success">Detail</a>
+        <table class="table">
+            <h2>Telusuri Berdasarkan Spesialisasi</h2>
+            <br>
+
+            <div class="container overflow-hidden">
+                <div class="row gy-5">
+                    <?php
+                    foreach ($result as $drl) {
+                    ?>
+                        <div class="col-6">
+                            <div class="p-3 border bg-light">
+                                <h5 class="card-title">Dokter <?= $drl['spesialis'] ?></h5>
+                                <p>Dokter <?= $drl['spesialis'] ?> adalah dokter yang menangani .....</p><br>
+                                <p>List Dokter : Jam Praktek</p>
+                                <ul>
+                                    <?php
+                                    $spe = $drl['spesialis'];
+                                    $res_spe = view_data("SELECT * FROM list_dokter WHERE spesialis='$spe'");
+                                    foreach ($res_spe as $sp_dr) {
+                                        $dr_id = $sp_dr['id_dokter'];
+                                        $pra_jk = view_data("SELECT * FROM poliklinik WHERE id_dokter='$dr_id'")[0];
+                                    ?>
+                                        <!-- <div class="px-3 row"> -->
+                                        <li><?= $sp_dr['nama_dokter'] ?> (<?= $pra_jk['jadwal_buka'] ?>)</li>
+                                        <!-- </div> -->
+                                    <?php
+                                    }
+                                    ?>
+                                </ul>
                             </div>
                         </div>
-                    </div><?php
-                        }
-                            ?>
+                    <?php
+                    }
+                    ?>
+
+                </div>
             </div>
-        </div>
-        <br><br>
+
+
+            <br>
+            <br>
+
+
     </div>
-
-
 
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

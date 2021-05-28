@@ -21,6 +21,8 @@ if (isset($_POST["sign_in"])) {
     $pass = $_POST["kata_sandi"];
     $user_admin = view_data("SELECT * FROM admin WHERE username='$username'")[0];
     $user_normal = view_data("SELECT * FROM akun WHERE username='$username'")[0];
+    $id_akn_usr = $user_normal['id_akun'];
+    $pngg = view_data("SELECT * FROM pengguna WHERE id_akun='$id_akn_usr'")[0];
     // $username = $user['username'];
     $user_tp = '';
 
@@ -38,6 +40,11 @@ if (isset($_POST["sign_in"])) {
 
     if (password_verify($pass, $user['password'])) {
         $_SESSION['log_uname'] = $username;
+        if ($user_tp == "admin") {
+            $_SESSION['log_fname'] = $username;
+        } else{
+            $_SESSION['log_fname'] = $pngg['nama_lengkap'];
+        }
         $_SESSION['eff_log'] = 1;
 
         if (!isset($_POST['rem_me'])) {
@@ -57,6 +64,7 @@ if (isset($_POST["sign_in"])) {
         }
     } else {
         $_SESSION['eff_log'] = 0;
+        unset($_SESSION['log_fname']);
         unset($_SESSION['log_uname']);
         header("Location: ../views/login.php");
     }
