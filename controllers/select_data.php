@@ -24,9 +24,9 @@ if (isset($_POST["sign_in"])) {
     // $username = $user['username'];
     $user_tp = '';
 
-    var_dump($user_admin);
+    // var_dump($user_admin);
     // print_r($user_admin);
-    var_dump($user_normal);
+    // var_dump($user_normal);
     // var_dump(password_hash('coba_password_disini', PASSWORD_DEFAULT));
     if (!empty($user_admin)) {
         $user_tp = 'admin';
@@ -53,7 +53,7 @@ if (isset($_POST["sign_in"])) {
         if ($user_tp == "admin") {
             header("Location: ../views/admins/adminRumahSakit.php");
         } else {
-            header("Location: ../views/pengguna/reservasi.php");
+            header("Location: ../views/pengguna/rumahSakit.php");
         }
     } else {
         $_SESSION['eff_log'] = 0;
