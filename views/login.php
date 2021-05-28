@@ -108,6 +108,7 @@
                 </a><br>
                 <form action="../controllers/select_data.php" method="POST">
                     <div class="row">
+                        <div class="form-group col-md-2"></div>
                         <div class="form-group col-md-4">
                             <label for="username_login" class="form-label">Username</label>
                         </div>
@@ -116,7 +117,8 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row pt-3">
+                        <div class="form-group col-md-2"></div>
                         <div class="form-group col-md-4">
                             <label for="kata_sandi" class="form-label">Kata Sandi</label>
                         </div>
@@ -125,7 +127,8 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row pt-3">
+                        <div class="form-group col-md-2"></div>
                         <div class="form-group col-md-4">
                             Ingat Saya
                         </div>
