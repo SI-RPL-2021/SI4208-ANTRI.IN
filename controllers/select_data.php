@@ -15,6 +15,21 @@ function view_data($query){
     return $rows;
 }
 
+//antrian
+if (isset($_POST["get_antrian"])) {
+    if(!empty($_SESSION['line_number'])){
+        $_SESSION['line_number'] = $_SESSION['line_number'] + 1;
+        header("Location: ../views/pengguna/historiReservasi.php");
+    }
+    else if(!empty($_COOKIE['line_number'])){
+        $_SESSION['line_number'] = $_COOKIE['line_number'] + 1;
+        header("Location: ../views/pengguna/historiReservasi.php"); 
+    } else {
+        $_COOKIE['line_number'] = -1;
+        header("Location: ../views/pengguna/dokterList.php"); 
+    }
+}
+
 // login
 if (isset($_POST["sign_in"])) {
     $username = $_POST["username_login"];
@@ -71,6 +86,4 @@ if (isset($_POST["sign_in"])) {
 
     // setcookie("username", $username, time()+ 86400,'/');
 }
-
-
 ?>

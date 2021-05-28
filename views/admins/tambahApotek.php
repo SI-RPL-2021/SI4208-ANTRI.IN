@@ -22,31 +22,28 @@ $pggn = view_data("SELECT * FROM pengguna");
 
 <body style="background-color: rgb(181, 240, 181);">
     <!--Navbar-->
-    <div class="container">
-        <font color=white>
-            <div class="d-flex justify-content-between">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-                    &nbsp;&nbsp;&nbsp;
-                    <a class="navbar-brand" href="">
-                        <img src="../../storages/gambar/logo.png" width="60" alt="ANTRI.IN">
-                    </a>
-                    <div class="collapse navbar-collapse nav justify-content-center" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="">
-                                    <h4>Tambahkan Data Apotek</h4>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <a href="adminApotek.php" type="button" class="btn btn-danger">Cancel</a>
+    <div class="d-flex justify-content-between">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="">
+                    <img src="../../storages/gambar/logo.png" width="60" alt="ANTRI.IN">
+                </a>
+                <div class="collapse navbar-collapse nav justify-content-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="">
+                                <h4>Tambahkan Data Apotek</h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="adminApotek.php" type="button" class="btn btn-danger">Cancel</a>
+                &nbsp;&nbsp;
+                <!--Form-->
+                <form action="../../controllers/add_data.php" method="POST">
+                    <input type="submit" class="btn btn-primary" value="Simpan" name="add_apotek"></input>
                     &nbsp;&nbsp;
-                    <!--Form-->
-                    <form action="../../controllers/add_data.php" method="POST">
-                        <input type="submit" class="btn btn-primary" value="Simpan" name="add_apotek"></input>
-                        &nbsp;&nbsp;
-                </nav>
-        </font>
+        </nav>
     </div>
     </div>
 

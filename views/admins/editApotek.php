@@ -30,10 +30,10 @@ $sltcd = '';
 
 <body style="background-color: rgb(181, 240, 181);">
     <!--Navbar-->
-    <div class="container">
-        <div class="d-flex justify-content-between">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-                &nbsp;&nbsp;&nbsp;
+
+    <div class="d-flex justify-content-between">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
                 <a class="navbar-brand" href="">
                     <img src="../../storages/gambar/logo.png" width="60" alt="">
                 </a>
@@ -53,8 +53,8 @@ $sltcd = '';
                     <input type="submit" class="btn btn-primary" value="Simpan" name="edit_apotek"></input>
                     <input type="hidden" name="id_apk_hid" value="<?= $result['id_'] ?>"></input>
                     &nbsp;&nbsp;
-            </nav>
-        </div>
+        </nav>
+    </div>
     </div>
 
     <!--Content-->

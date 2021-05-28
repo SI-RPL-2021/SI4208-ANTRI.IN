@@ -17,34 +17,32 @@
 
 <body style="background-color: rgb(181, 240, 181);">
     <!--Navbar-->
-    <div class="container">
-        <font color=white>
-            <div class="d-flex justify-content-between">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-                    &nbsp;&nbsp;&nbsp;
-                    <a class="navbar-brand" href="">
-                        <img src="../../storages/gambar/logo.png" width="60" alt="ANTRI.IN">
-                    </a>
-                    <div class="collapse navbar-collapse nav justify-content-center" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link active" aria-current="page" href="">
-                                    <h4>Tambahkan Data Rumah Sakit</h4>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <a href="adminRumahSakit.php" type="button" class="btn btn-danger">Cancel</a>
+    <div class="d-flex justify-content-between">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="">
+                    <img src="../../storages/gambar/logo.png" width="60" alt="ANTRI.IN">
+                </a>
+                <div class="collapse navbar-collapse nav justify-content-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="">
+                                <h4>Tambahkan Data Dokter</h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="adminRumahSakit.php" type="button" class="btn btn-danger">Cancel</a>
+                &nbsp;&nbsp;
+                <!--Form-->
+                <form action="../../controllers/add_data.php" method="POST">
+                    <input type="submit" class="btn btn-primary" value="Simpan" name="add_hospital"></input>
                     &nbsp;&nbsp;
-                    <!--Form-->
-                    <form action="../../controllers/add_data.php" method="POST">
-                        <input type="submit" class="btn btn-primary" value="Simpan" name="add_hospital"></input>
-                        &nbsp;&nbsp;
-                </nav>
-        </font>
+            </div>
+        </nav>
     </div>
-    </div>
-    <!--Navbar-->
+
+    <!--content-->
     <br><br><br><br>
     <div class="container" style="background-color: white; border-radius: 7px;">
         <center>
@@ -60,27 +58,27 @@
                 </div>
                 <div class="col-sm">
 
-                        <div class="mb-3">
-                            <label for="exampleInputNama" class="form-label">Nama Rumah Sakit</label>
-                            <input type="nama" class="form-control" id="exampleInputNama" name="namaRs"
-                                aria-describedby="namaHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputAlamat" class="form-label">Alamat</label>
-                            <input type="alamat" class="form-control" id="exampleInputAlamat" name="alamatRs"
-                                aria-describedby="alamatHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputTelp" class="form-label">No Telepon</label>
-                            <input type="telp" class="form-control" id="exampleInputTelp" name="telpRs"
-                                aria-describedby="telpHelp">
-                        </div>
+                    <div class="mb-3">
+                        <label for="exampleInputNama" class="form-label">Nama Rumah Sakit</label>
+                        <input type="nama" class="form-control" id="exampleInputNama" name="namaRs"
+                            aria-describedby="namaHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputAlamat" class="form-label">Alamat</label>
+                        <input type="alamat" class="form-control" id="exampleInputAlamat" name="alamatRs"
+                            aria-describedby="alamatHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputTelp" class="form-label">No Telepon</label>
+                        <input type="telp" class="form-control" id="exampleInputTelp" name="telpRs"
+                            aria-describedby="telpHelp">
+                    </div>
 
                     </form>
                     <!--Form-->
                 </div>
                 <div class="col-sm">
-                
+
                 </div>
             </div>
         </div>

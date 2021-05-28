@@ -20,10 +20,9 @@ $dr_res = view_data("SELECT * FROM list_dokter");
 
 <body style="background-color: rgb(181, 240, 181);">
     <!--Navbar-->
-    <div class="container">
-        <div class="d-flex justify-content-between">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-                &nbsp;&nbsp;&nbsp;
+    <div class="d-flex justify-content-between">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
                 <a class="navbar-brand" href="">
                     <img src="../../storages/gambar/logo.png" width="60" alt="ANTRI.IN">
                 </a>
@@ -43,8 +42,8 @@ $dr_res = view_data("SELECT * FROM list_dokter");
                     <input type="submit" class="btn btn-primary" value="Simpan" name="add_poli"></input>
                     <input type="hidden" name="id_rs_hid" value="<?= $_GET['id_rs'] ?>"></input>
                     &nbsp;&nbsp;
-            </nav>
-        </div>
+        </nav>
+    </div>
     </div>
     <!--Navbar-->
     <br><br><br><br>
@@ -71,18 +70,18 @@ $dr_res = view_data("SELECT * FROM list_dokter");
                         <label for="cats" class="form-label">Dokter</label>
 
                         <select name="drName" id="cats" class="form-control">
-                        <?php
-                        foreach ($dr_res as $dr) {
-                        ?>
-                            <!-- <div class="col-md-4">
+                            <?php
+                            foreach ($dr_res as $dr) {
+                            ?>
+                                <!-- <div class="col-md-4">
                                 <input class="form-check-input" type="radio" value="<?= $dr['id_dokter'] ?>" name="id_dok_chk" id="cats">
                                 <?= $dr['nama_dokter'] ?>
                             </div> -->
-                            <option value="<?= $dr['id_dokter'] ?>"><?= $dr['nama_dokter'] ?></option>
-                            <!-- <input type="hidden" name="id_dokter_hid" value="<?= $dr['id_dokter'] ?>" class="form-control"></input> -->
-                        <?php
-                        }
-                        ?>
+                                <option value="<?= $dr['id_dokter'] ?>"><?= $dr['nama_dokter'] ?></option>
+                                <!-- <input type="hidden" name="id_dokter_hid" value="<?= $dr['id_dokter'] ?>" class="form-control"></input> -->
+                            <?php
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="mb-3">

@@ -1,6 +1,10 @@
 <?php require_once '../../controllers/select_data.php';
 $id_rsv = $_GET['id_dok_rsv'];
+$usr_rsv = $_SESSION['log_uname'];
 $rsv_res = view_data("SELECT * FROM list_dokter WHERE id_dokter = '$id_rsv'")[0];
+$rsv_usr = view_data("SELECT * FROM akun WHERE username = '$usr_rsv'")[0];
+$id_akun_rsv = $rsv_usr['id_akun'];
+$rsv_usr = view_data("SELECT * FROM pengguna WHERE id_akun = '$id_akun_rsv'")[0];
 ?>
 <!doctype html>
 <html lang="en">
@@ -39,31 +43,24 @@ $rsv_res = view_data("SELECT * FROM list_dokter WHERE id_dokter = '$id_rsv'")[0]
                 </div>
                 <a href="dokterList.php" type="button" class="btn btn-danger">Cancel</a>
                 &nbsp;&nbsp;
-                <!--Form-->
-                <form action="../../controllers/edit_data.php" method="POST">
-                    <input type="submit" class="btn btn-primary" value="Reservasi" name="edit_apotek"></input>
-                    <!-- <input type="hidden" name="id_apk_hid" value="<?= $result['id_'] ?>"></input> -->
-                    &nbsp;&nbsp;
+
             </nav>
         </div>
     </div>
 
     <!--Container body-->
-    <br><br><br><br><br>
+    <br><br><br><br>
     <div class="container" style="background-color: white; border-radius: 5%;">
-        <br>
         <!--Grid-->
         <br><br>
         <div class="container">
             <div class="row">
-                <div class="col-sm">
-                    <center>
-                        <img src="../../storages/gambar/cwe.png" style="width: 250px;">
-                    </center>
+                <div class="col-sm text-center">
+                    <img src="../../storages/gambar/cwe.png" style="width: 250px;">
                 </div>
                 <!--container-->
                 <div class="col-sm" style="background-color: rgb(143, 219, 143); border-radius: 15px;">
-                    <br><br>
+                    <br>
                     <table style="margin-left: 10px;">
                         <tr>
                             <td>Dokter</td>
@@ -82,51 +79,68 @@ $rsv_res = view_data("SELECT * FROM list_dokter WHERE id_dokter = '$id_rsv'")[0]
                         </tr>
                     </table>
                     <br>
-                    <div class="container" style="background-color: rgb(4, 71, 4);">
+                    <div class="container text-center" style="background-color: rgb(4, 71, 4); color:white;">
                         <h6>
-                            <center>
-                                <font color=white><b>P A S I E N</b></font>
-                            </center>
+                            <b>P A S I E N</b>
                         </h6>
                     </div>
                     <br>
-                    <div class="mb-3 row">
+                    <div class="mb-2 row">
                         <label for="inputnama" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10" style="border-radius: 12px;">
-                            <input type="nama" class="form-control" id="inputnama">
+                            <input type="nama" class="form-control" id="inputnama" value="<?= $rsv_usr['nama_lengkap'] ?>" disabled>
                         </div>
                     </div>
-                    <div class="mb-3 row">
+                    <div class="mb-2 row">
+                        <?php
+                        $bday = new Datetime($rsv_usr['tanggal_lahir']); // Your date of birth
+                        $today = new Datetime();
+                        $diff = $today->diff($bday);
+
+                        $addkkk = $_COOKIE['line_number'] + 1; 
+                        // $dateOfBirth = $rsv_usr['tanggal_lahir'];
+                        // $today = date("Y-m-d");
+                        // $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                        ?>
                         <label for="inputusia" class="col-sm-2 col-form-label">Usia</label>
                         <div class="col-sm-10" style="border-radius: 12px;">
-                            <input type="usia" class="form-control" id="inputusia">
+                        <input type="usia" class="form-control" id="inputusia" value="<?= $diff->y ?> tahun" disabled>
+                        <!-- <input type="usia" class="form-control" id="inputusia" value="<?= $addkkk ?> tahun" disabled> -->
+                            <!-- <input type="usia" class="form-control" id="inputusia" value="<?= $diff->format('%y') ?> tahun" disabled> -->
                         </div>
                     </div>
-                    <div class="mb-3 row">
+                    <div class="mb-2 row">
                         <label for="inputalamat" class="col-sm-2 col-form-label">Alamat</label>
                         <div class="col-sm-10" style="border-radius: 12px;">
-                            <input type="alamat" class="form-control" id="inputalamat">
+                            <input type="alamat" class="form-control" id="inputalamat" value="<?= $rsv_usr['alamat'] ?>" disabled>
                         </div>
                     </div>
-                    <div class="mb-3 row">
+                    <div class="mb-2 row">
                         <label for="inputnohp" class="col-sm-2 col-form-label">No.Hp</label>
                         <div class="col-sm-10" style="border-radius: 12px;">
-                            <input type="nohp" class="form-control" id="inputnohp">
+                            <input type="nohp" class="form-control" id="inputnohp" value="<?= $rsv_usr['no_telepon'] ?>" disabled>
                         </div>
                     </div>
-                    </form>
+
+                    <!--Form-->
+                    <div class="mb-3 row text-center pt-1">
+                        <form action="../../controllers/select_data.php" method="POST">
+                            <input type="submit" class="btn btn-warning" value="Buat Reservasi" name="get_antrian" style="width:390px; background-color:pink; border-color:pink;"></input>
+                            <!-- <input type="hidden" name="id_apk_hid" value="<?= $result['id_'] ?>"></input> -->
+                            &nbsp;&nbsp;
+                        </form>
+                    </div>
                 </div>
 
                 <!--akhir container-->
-                <div class="col-sm">
-                    <center>
-                        <img src="../../storages/gambar/cwo.png" style="width: 250px;">
-                    </center>
+                <div class="col-sm text-center">
+                    <img src="../../storages/gambar/cwo.png" style="width: 250px;">
                 </div>
 
-                <div class="container px-5 mx-5">
-                    <div class="row pt-4 text-center">
-                        <input type="number" class="form-control" id="inputlinenumber" value="<?= $_COOKIE['line_number'] ?>">
+                <div class="container mr-5 text-center">
+                    <div class="row pt-4">
+                        <input type="string" class="btn btn-info" id="inputlinenumber" value="No. Antrian -->
+                        <?= $_SESSION['line_number'] ?>" disabled style="font-size:80px;">
                     </div>
                 </div>
 
