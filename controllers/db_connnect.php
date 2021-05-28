@@ -7,6 +7,8 @@ if (!$conn) {
     die("Can't connect bruh : " . mysqli_connect_error());
 }
 
+setcookie('line_number', 1, time() + 3600 * 15, '/');
+
 // log out
 if (isset($_GET['out_log'])) {
     if ($_GET['out_log'] == 'zft') {

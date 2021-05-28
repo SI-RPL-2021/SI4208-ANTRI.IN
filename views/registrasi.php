@@ -101,9 +101,9 @@ require '../controllers/add_data.php';
                             <label for="telepon" class="form-label">No. Telepon</label>
                             <input type="telepon" class="form-control" id="telepon" name="telepon" aria-describedby="teleponHelp" placeholder="Tulis nomor telepon anda disini">
                         </div>
-                        <div class="row text-center mb-3">
+                        <div class="row text-center mb-3 pt-2">
                             <div class="col-md-12">
-                                <input type="submit" class="btn btn-primary" value="Daftar" name="daftar_akun"></input>
+                                <input type="submit" class="btn btn-success" value="Daftar" name="daftar_akun"></input>
                                 <input type="reset" class="btn btn-secondary" value="Cancel"></input>
                                 <div class="mt-3 text-center">
                                     Sudah punya akun? <a href="login.php">Login disini</a>

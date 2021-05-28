@@ -116,16 +116,24 @@ $rsv_res = view_data("SELECT * FROM list_dokter WHERE id_dokter = '$id_rsv'")[0]
                     </div>
                     </form>
                 </div>
+
                 <!--akhir container-->
                 <div class="col-sm">
                     <center>
                         <img src="../../storages/gambar/cwo.png" style="width: 250px;">
                     </center>
                 </div>
+
+                <div class="container px-5 mx-5">
+                    <div class="row pt-4 text-center">
+                        <input type="number" class="form-control" id="inputlinenumber" value="<?= $_COOKIE['line_number'] ?>">
+                    </div>
+                </div>
+
             </div>
         </div>
         <!--akhir grid-->
-        <br><br><br>
+        <br>
     </div>
 
 
