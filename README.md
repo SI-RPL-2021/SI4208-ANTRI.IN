@@ -1,11 +1,11 @@
-##### SI4208-ANTRI.IN &copy; 2021
+##### SI4208-ANTRI.IN &copy; 2021 - https://antri-in.herokuapp.com/
 
 # Hi, Selamat Datang bagi Kalian semua :wave:
 
 Repository ini berisi web yang dapat membantu kalian agar senantiasa sehat :ok_hand: <br>
 Mari hidup sehat selamanya :blush:
 
-How to run web (Windows <img src="https://wiki.videolan.org/images/Windows_logo.png" height=15 width=15>):
+How to run web in **Development Mode** (Windows <img src="https://wiki.videolan.org/images/Windows_logo.png" height=15 width=15>):
 1. Pastikan sudah menginstall xampp versi > 7.2 (*services* paket lengkap) pada default direktori ```C:\xampp```
 2. Pastikan mempunyai ***google chrome***
 3. Clone *repository* ini ke dalam folder bernama ```Antriin```
