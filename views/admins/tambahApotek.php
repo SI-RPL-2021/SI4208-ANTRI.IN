@@ -83,9 +83,9 @@ $pggn = view_data("SELECT * FROM pengguna");
                             <?php
                             foreach ($rp_obat as $obt) {
                                 $id_rkm = $obt['id_rekam_medis'];
-                                $rkm = view_data("SELECT * FROM rekam_medis WHERE `id_rekam_medis` = $id_rkm")[0];
+                                $rkm = data_view("SELECT * FROM rekam_medis WHERE `id_rekam_medis` = ?", $id_rkm);
                                 $id_usr = $rkm['id_user'];
-                                $pgn = view_data("SELECT * FROM pengguna WHERE `id_user` = $id_usr")[0];
+                                $pgn = data_view("SELECT * FROM pengguna WHERE `id_user` = ?", $id_usr);
                             ?>
                                 <option value="<?= $obt['id_resep_obat'] ?>"><?= $pgn['nama_lengkap'] ?> - <?= $obt['daftar_obat'] ?></option>
                             <?php

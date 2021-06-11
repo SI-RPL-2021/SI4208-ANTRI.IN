@@ -3,8 +3,8 @@ require_once '../../controllers/select_data.php';
 
 if (isset($_GET['id_rs'])) {
     $id_num = $_GET['id_rs'];
-    $result = view_data("SELECT * FROM poliklinik WHERE id_rs=$id_num");
-    $rs_res = view_data("SELECT * FROM rumah_sakit WHERE id_rs=$id_num")[0];
+    $result = data_views("SELECT * FROM poliklinik WHERE id_rs like ?", $id_num);
+    $rs_res = data_view("SELECT * FROM rumah_sakit WHERE id_rs = ?", $id_num);
     $_SESSION['id_no'] = $id_num;
 }
 
@@ -108,7 +108,7 @@ $_SESSION['eff_del_one'] = -1;
                         $no_dr = 1;
                         foreach ($result as $item) {
                             $id_dok = $item["id_dokter"];
-                            $dr_res = view_data("SELECT * FROM list_dokter WHERE id_dokter=$id_dok")[0];
+                            $dr_res = data_view("SELECT * FROM list_dokter WHERE id_dokter=?", $id_dok);
                         ?>
                             <tr>
                                 <td><?php echo $no_dr ?></td>

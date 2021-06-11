@@ -6,7 +6,7 @@ $pggn = view_data("SELECT * FROM pengguna");
 
 if (isset($_GET['id_apk'])) {
     $id_num = $_GET['id_apk'];
-    $result = view_data("SELECT * FROM apotek WHERE id_apotek=$id_num")[0];
+    $result = data_view("SELECT * FROM apotek WHERE id_apotek = ?", $id_num);
     $_SESSION['id_no'] = $id_num;
 }
 
@@ -90,9 +90,9 @@ $sltcd = '';
                             <?php
                             foreach ($rp_obat as $obt) {
                                 $id_rkm = $obt['id_rekam_medis'];
-                                $rkm = view_data("SELECT * FROM rekam_medis WHERE `id_rekam_medis` = $id_rkm")[0];
+                                $rkm = data_view("SELECT * FROM rekam_medis WHERE `id_rekam_medis` = ?", $id_rkm);
                                 $id_usr = $rkm['id_user'];
-                                $pgn = view_data("SELECT * FROM pengguna WHERE `id_user` = $id_usr")[0];
+                                $pgn = data_view("SELECT * FROM pengguna WHERE `id_user` = ?", $id_usr);
                                 if ($obt['id_resep_obat'] == $result['id_resep_obat']) {
                                     $sltcd = 'selected';
                                 } else {

@@ -1,15 +1,15 @@
 <?php require_once '../../controllers/select_data.php';
 $id_rsv = $_GET['id_dok_rsv'];
 $usr_rsv = $_SESSION['log_uname'];
-$rsv_res = view_data("SELECT * FROM list_dokter WHERE id_dokter = '$id_rsv'")[0];
-$rsv_usr = view_data("SELECT * FROM akun WHERE username = '$usr_rsv'")[0];
+$rsv_res = data_view("SELECT * FROM list_dokter WHERE id_dokter = ?", $id_rsv);
+$rsv_usr = data_view("SELECT * FROM akun WHERE username = ?", $usr_rsv);
 $id_akun_rsv = $rsv_usr['id_akun'];
-$rsv_usr = view_data("SELECT * FROM pengguna WHERE id_akun = '$id_akun_rsv'")[0];
+$rsv_usr = data_view("SELECT * FROM pengguna WHERE id_akun = ?", $id_akun_rsv);
 
-$poli_rsv = view_data("SELECT * FROM poliklinik WHERE id_dokter = '$id_rsv'")[0];
+$poli_rsv = data_view("SELECT * FROM poliklinik WHERE id_dokter = ?", $id_rsv);
 $rs_poli = $poli_rsv['id_rs'];
 
-$hsp_rsv = view_data("SELECT * FROM rumah_sakit WHERE id_rs = '$rs_poli'")[0];
+$hsp_rsv = data_view("SELECT * FROM rumah_sakit WHERE id_rs = ?", $rs_poli);
 ?>
 <!doctype html>
 <html lang="en">

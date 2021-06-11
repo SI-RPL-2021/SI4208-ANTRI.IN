@@ -1,8 +1,8 @@
 <?php require_once '../../controllers/select_data.php';
 $id_usr_rsvp = $_SESSION['log_uname'];
-$usr_rsvp = view_data("SELECT * FROM akun WHERE username='$id_usr_rsvp'")[0];
+$usr_rsvp = data_view("SELECT * FROM akun WHERE username = ?", $id_usr_rsvp);
 $id_akun_rsvp = $usr_rsvp['id_akun'];
-$usr_rsvp = view_data("SELECT * FROM pengguna WHERE id_akun='$id_akun_rsvp'")[0];
+$usr_rsvp = data_view("SELECT * FROM pengguna WHERE id_akun = ?", $id_akun_rsvp);
 $id_rsvp = $usr_rsvp['id_user'];
 $result = view_data("SELECT * FROM reservasi WHERE id_user='$id_rsvp'");
 ?>
@@ -106,8 +106,8 @@ $result = view_data("SELECT * FROM reservasi WHERE id_user='$id_rsvp'");
                         foreach ($result as $item) {
                             $id_dok = $item['id_dokter'];
                             $id_rs = $item['id_rs'];
-                            $dok_rsvp = view_data("SELECT * FROM list_dokter WHERE id_dokter='$id_dok'")[0];
-                            $rs_rsvp = view_data("SELECT * FROM rumah_sakit WHERE id_rs='$id_rs'")[0];
+                            $dok_rsvp = data_view("SELECT * FROM list_dokter WHERE id_dokter = ?", $id_dok);
+                            $rs_rsvp = data_view("SELECT * FROM rumah_sakit WHERE id_rs = ?", $id_rs);
                         ?>
                             <tr>
                                 <td><?php echo $item['id_reservasi'] ?></td>

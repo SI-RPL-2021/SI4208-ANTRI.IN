@@ -94,10 +94,10 @@ $result = view_data("SELECT DISTINCT spesialis FROM list_dokter");
                                 <ul>
                                     <?php
                                     $spe = $drl['spesialis'];
-                                    $res_spe = view_data("SELECT * FROM list_dokter WHERE spesialis='$spe'");
+                                    $res_spe = data_views("SELECT * FROM list_dokter WHERE spesialis like ?", $spe, 's');
                                     foreach ($res_spe as $sp_dr) {
                                         $dr_id = $sp_dr['id_dokter'];
-                                        $pra_jk = view_data("SELECT * FROM poliklinik WHERE id_dokter='$dr_id'")[0];
+                                        $pra_jk = data_view("SELECT * FROM poliklinik WHERE id_dokter = ?", $dr_id);
                                     ?>
                                         <!-- <div class="px-3 row"> -->
                                         <li><a href="reservasi.php?id_dok_rsv=<?= $dr_id ?>"><?= $sp_dr['nama_dokter'] ?></a> (<?= $pra_jk['jadwal_buka'] ?>)</li>

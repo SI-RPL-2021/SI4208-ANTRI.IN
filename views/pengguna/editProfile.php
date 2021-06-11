@@ -3,10 +3,10 @@ require_once '../../controllers/select_data.php';
 
 if (isset($_SESSION['log_uname'])) {
     $id_num = $_SESSION['log_uname'];
-    $result = view_data("SELECT * FROM akun WHERE username='$id_num'")[0];
+    $result = data_view("SELECT * FROM akun WHERE username = ?", $id_num);
     // var_dump($result);
     $id_akn = $result["id_akun"];
-    $usr_res = view_data("SELECT * FROM pengguna WHERE id_akun=$id_akn")[0];
+    $usr_res = data_view("SELECT * FROM pengguna WHERE id_akun = ?", $id_akn);
     // var_dump($usr_res);
     $_SESSION['id_no'] = $usr_res['id_user'];
 }

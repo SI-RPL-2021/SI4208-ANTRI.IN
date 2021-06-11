@@ -3,7 +3,7 @@ require_once '../../controllers/select_data.php';
 
 if (isset($_GET['id_rs'])) {
     $id_num = $_GET['id_rs'];
-    $result = view_data("SELECT * FROM rumah_sakit WHERE id_rs=$id_num")[0];
+    $result = data_view("SELECT * FROM rumah_sakit WHERE id_rs = ?", $id_num);
     $_SESSION['id_no'] = $id_num;
 }
 ?>

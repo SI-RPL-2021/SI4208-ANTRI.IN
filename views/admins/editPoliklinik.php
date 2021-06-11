@@ -4,7 +4,7 @@ $dr_res = view_data("SELECT * FROM list_dokter");
 
 if (isset($_GET['id_poli'])) {
     $id_num = $_GET['id_poli'];
-    $result = view_data("SELECT * FROM poliklinik WHERE id_poli=$id_num")[0];
+    $result = data_view("SELECT * FROM poliklinik WHERE id_poli = ?", $id_num);
     $_SESSION['id_no'] = $id_num;
 }
 
