@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2021 at 09:29 AM
+-- Generation Time: Jun 13, 2021 at 05:27 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -80,8 +80,46 @@ CREATE TABLE `apotek` (
 --
 
 INSERT INTO `apotek` (`id_apotek`, `nama_apotek`, `alamat_apotek`, `no_telepon_apotek`, `id_resep_obat`) VALUES
-(51722021012851, 'Jaya Farma Sejahtera', 'Jalan Flamboyan No.35', '03892 320023', 202190522891),
-(58712021022832, 'Vita CImin', 'jalan merdeka raya,', '343434', 202190522891);
+(51722021012851, 'Jaya Farma Sejahtera', 'Jalan Flamboyan No.35', '03892 320023', 202139020522891),
+(58712021022832, 'Vita CImin', 'jalan merdeka raya,', '343434', 202139020522891);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat_online`
+--
+
+CREATE TABLE `chat_online` (
+  `id_chat` bigint(20) NOT NULL,
+  `conversations` text NOT NULL,
+  `time_cnvs` datetime NOT NULL,
+  `id_dok_chat` bigint(20) NOT NULL,
+  `id_akun_chat` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dokter_akun`
+--
+
+CREATE TABLE `dokter_akun` (
+  `id_akun_dok` bigint(20) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(70) NOT NULL,
+  `email` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dokter_akun`
+--
+
+INSERT INTO `dokter_akun` (`id_akun_dok`, `username`, `password`, `email`) VALUES
+(6131043867, 'rachel33', '$2y$10$oPM389z/m.uZDMcmuX5ayOoTev/zUy2UMU.7dYHrN.ka4pGlkZRmy', 'rachel33@antri.in'),
+(6131046291, 'thorston55', '$2y$10$.Tw09z1Evf1QQozLEZAUb.Dc747aO.cjZtjtFzWwklXIoLLczmo.W', 'thorston55@antri.in'),
+(6131048631, 'lisa77', '$2y$10$nHdXEf9UEg2l4zNy7wX/mOwkwWbG02D4GKdawKdoGcBaEoSlJntIe', 'lisa77@antri.in'),
+(6131049003, 'mark88', '$2y$10$NEwm5gIYOLpcGHjoofNebuQaQ5TgRFMGMjn/w0H/vLXwP0YluaK3K', 'mark88@antri.in'),
+(6131050280, 'george00', '$2y$10$3R0TDpANQtvoqVDtyVoOeuQTE.lcGsV8yhz0gZCUzoP5K4O13tRZ2', 'george00@antri.in');
 
 -- --------------------------------------------------------
 
@@ -93,19 +131,20 @@ CREATE TABLE `list_dokter` (
   `id_dokter` bigint(20) NOT NULL,
   `nama_dokter` varchar(50) NOT NULL,
   `spesialis` varchar(30) NOT NULL,
-  `no_telepon` varchar(25) NOT NULL
+  `no_telepon` varchar(25) NOT NULL,
+  `id_akun_dok` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `list_dokter`
 --
 
-INSERT INTO `list_dokter` (`id_dokter`, `nama_dokter`, `spesialis`, `no_telepon`) VALUES
-(202104281210534, 'Rachel', 'Kandungan', '920023203'),
-(202104281360554, 'Mark', 'Penyakit dalam', '0892382399'),
-(202104281730631, 'Thorston', 'Gigi', '0882993434'),
-(202104283540553, 'Lisa', 'Anak', '39393939'),
-(202104284320535, 'George', 'Anak', '343434');
+INSERT INTO `list_dokter` (`id_dokter`, `nama_dokter`, `spesialis`, `no_telepon`, `id_akun_dok`) VALUES
+(202104281210534, 'Rachel', 'Kandungan', '920023203', 6131043867),
+(202104281360554, 'Mark', 'Penyakit dalam', '0892382399', 6131049003),
+(202104281730631, 'Thorston', 'Gigi', '0882993434', 6131046291),
+(202104283540553, 'Lisa', 'Anak', '39393939', 6131048631),
+(202104284320535, 'George', 'Anak', '343434', 6131050280);
 
 -- --------------------------------------------------------
 
@@ -178,7 +217,7 @@ CREATE TABLE `rekam_medis` (
 --
 
 INSERT INTO `rekam_medis` (`id_rekam_medis`, `id_user`, `id_rs`, `id_reservasi`, `keluhan`, `diagnosis`) VALUES
-(202105892287, 202104280444361, 42820210835905, 20217830528, 'Sakit Hati', 'Kelihatan Depresi');
+(202105892075928, 202104280444361, 42820210835905, 20217830528, 'Sakit Hati', 'Kelihatan Depresi');
 
 -- --------------------------------------------------------
 
@@ -197,7 +236,7 @@ CREATE TABLE `resep_obat` (
 --
 
 INSERT INTO `resep_obat` (`id_resep_obat`, `id_rekam_medis`, `daftar_obat`) VALUES
-(202190522891, 202105892287, 'Air Putih; ...');
+(202139020522891, 202105892075928, 'Air Putih; ...');
 
 -- --------------------------------------------------------
 
@@ -208,6 +247,7 @@ INSERT INTO `resep_obat` (`id_resep_obat`, `id_rekam_medis`, `daftar_obat`) VALU
 CREATE TABLE `reservasi` (
   `id_reservasi` bigint(20) NOT NULL,
   `nomor_antrian` varchar(10) NOT NULL,
+  `status_reserv` varchar(15) NOT NULL,
   `id_user` bigint(20) NOT NULL,
   `id_dokter` bigint(20) NOT NULL,
   `id_rs` bigint(20) NOT NULL
@@ -217,10 +257,12 @@ CREATE TABLE `reservasi` (
 -- Dumping data for table `reservasi`
 --
 
-INSERT INTO `reservasi` (`id_reservasi`, `nomor_antrian`, `id_user`, `id_dokter`, `id_rs`) VALUES
-(20217830528, '56', 202104280444361, 202104283540553, 42820210835905),
-(202105280923158, '10', 202105280242775, 202104281210534, 42820210835905),
-(202105280923207, '11', 202105280242775, 202104283540553, 52820210336702);
+INSERT INTO `reservasi` (`id_reservasi`, `nomor_antrian`, `status_reserv`, `id_user`, `id_dokter`, `id_rs`) VALUES
+(20217830528, '56', 'selesai', 202104280444361, 202104283540553, 42820210835905),
+(202105280923158, '10', 'selesai', 202105280242775, 202104281210534, 42820210835905),
+(202105280923207, '11', 'selesai', 202105280242775, 202104283540553, 52820210336702),
+(202105281117298, '12', 'selesai', 202104280444361, 202104281730631, 52820210336702),
+(202106130341710, '2', 'selesai', 202104280444361, 202104281360554, 42820210835905);
 
 -- --------------------------------------------------------
 
@@ -269,10 +311,25 @@ ALTER TABLE `apotek`
   ADD KEY `fk_id_resep_obat` (`id_resep_obat`);
 
 --
+-- Indexes for table `chat_online`
+--
+ALTER TABLE `chat_online`
+  ADD PRIMARY KEY (`id_chat`),
+  ADD KEY `fk_id_dok_chat` (`id_dok_chat`),
+  ADD KEY `fk_id_akun_chat` (`id_akun_chat`);
+
+--
+-- Indexes for table `dokter_akun`
+--
+ALTER TABLE `dokter_akun`
+  ADD PRIMARY KEY (`id_akun_dok`);
+
+--
 -- Indexes for table `list_dokter`
 --
 ALTER TABLE `list_dokter`
-  ADD UNIQUE KEY `id_dokter` (`id_dokter`);
+  ADD UNIQUE KEY `id_dokter` (`id_dokter`),
+  ADD KEY `fk_id_akun_dok` (`id_akun_dok`);
 
 --
 -- Indexes for table `pengguna`
@@ -329,6 +386,19 @@ ALTER TABLE `rumah_sakit`
 --
 ALTER TABLE `apotek`
   ADD CONSTRAINT `fk_id_resep_obat` FOREIGN KEY (`id_resep_obat`) REFERENCES `resep_obat` (`id_resep_obat`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `chat_online`
+--
+ALTER TABLE `chat_online`
+  ADD CONSTRAINT `fk_id_akun_chat` FOREIGN KEY (`id_akun_chat`) REFERENCES `akun` (`id_akun`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_id_dok_chat` FOREIGN KEY (`id_dok_chat`) REFERENCES `list_dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `list_dokter`
+--
+ALTER TABLE `list_dokter`
+  ADD CONSTRAINT `fk_id_akun_dok` FOREIGN KEY (`id_akun_dok`) REFERENCES `dokter_akun` (`id_akun_dok`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pengguna`
