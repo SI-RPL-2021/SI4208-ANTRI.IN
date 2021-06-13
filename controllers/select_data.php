@@ -98,10 +98,10 @@ if (isset($_POST["get_antrian"])) {
 if (isset($_POST["sign_in"])) {
     $username = $_POST["username_login"];
     $pass = $_POST["kata_sandi"];
-    $user_admin = view_data("SELECT * FROM admin WHERE username='$username'")[0];
-    $user_normal = view_data("SELECT * FROM akun WHERE username='$username'")[0];
+    $user_admin = data_views("SELECT * FROM admin WHERE `username` = ?", $username, 's')[0];
+    $user_normal = data_views("SELECT * FROM akun WHERE `username` = ?", $username, 's')[0];
     $id_akn_usr = $user_normal['id_akun'];
-    $pngg = view_data("SELECT * FROM pengguna WHERE id_akun='$id_akn_usr'")[0];
+    $pngg = data_view("SELECT * FROM pengguna WHERE id_akun = ?", $id_akn_usr);
     // $username = $user['username'];
     $user_tp = '';
 

@@ -4,7 +4,7 @@ $usr_rsvp = data_view("SELECT * FROM akun WHERE username = ?", $id_usr_rsvp);
 $id_akun_rsvp = $usr_rsvp['id_akun'];
 $usr_rsvp = data_view("SELECT * FROM pengguna WHERE id_akun = ?", $id_akun_rsvp);
 $id_rsvp = $usr_rsvp['id_user'];
-$result = view_data("SELECT * FROM reservasi WHERE id_user='$id_rsvp'");
+$result = data_views("SELECT * FROM reservasi WHERE id_user = ?", $id_rsvp);
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,7 +17,7 @@ $result = view_data("SELECT * FROM reservasi WHERE id_user='$id_rsvp'");
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-    <title>Daftar Rumah Sakit</title>
+    <title>List Reservasi</title>
 
     <link rel="icon" href="../../storages/gambar/logo.png" type="image/png" sizes="128x128">
 

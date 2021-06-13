@@ -73,7 +73,6 @@ function update_profile($data, $id_user){
 
 function update_apotek($data, $id_apotek){
     global $conn;
-    // $rs_row = view_data("SELECT * FROM `list_dokter` WHERE id_dokter='$id_dok'")[0];
     $update_stmt = '';
     $query = '';
 
@@ -99,7 +98,6 @@ function update_apotek($data, $id_apotek){
 
 function update_dokter($data, $id_dok){
     global $conn;
-    // $rs_row = view_data("SELECT * FROM `list_dokter` WHERE id_dokter='$id_dok'")[0];
     $update_stmt = '';
     $query = '';
 
@@ -124,7 +122,6 @@ function update_dokter($data, $id_dok){
 
 function update_pengguna($data, $id_user){
     global $conn;
-    // $rs_row = view_data("SELECT * FROM `list_dokter` WHERE id_dokter='$id_dok'")[0];
     $update_stmt = '';
     $query = '';
 
@@ -149,7 +146,6 @@ function update_pengguna($data, $id_user){
 
 function update_hospital($data, $id_rs){
     global $conn;
-    // $rs_row = view_data("SELECT * FROM `list_dokter` WHERE id_dokter='$id_dok'")[0];
     $update_stmt = '';
     $query = '';
 
@@ -174,7 +170,6 @@ function update_hospital($data, $id_rs){
 
 function update_poli($data, $id_poli){
     global $conn;
-    // $rs_row = view_data("SELECT * FROM `list_dokter` WHERE id_dokter='$id_dok'")[0];
     $update_stmt = '';
     $query = '';
 
