@@ -6,7 +6,7 @@ $eff_rw = -1;
 if (!$conn) {
     die("Can't connect bruh : " . mysqli_connect_error());
 }
-
+// var_dump(password_hash('i dont know this', PASSWORD_DEFAULT));
 setcookie('line_number', 1, time() + 3600 * 15, '/');
 
 // log out

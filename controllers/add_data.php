@@ -8,6 +8,12 @@ if(isset($_POST["daftar_akun"])){
     header("Location: ../views/login.php");
 }
 
+// isi rekam medis
+if(isset($_POST["add_rekam"])){
+    $_SESSION['eff_add'] = insert_rekam_medis($_POST);
+    header("Location: ../views/pengguna/rekamMedis.php");
+}
+
 // tambah dokter
 if(isset($_POST["add_apotek"])){
     $_SESSION['eff_add'] = insert_apotek($_POST);
@@ -31,6 +37,18 @@ if(isset($_POST["add_poli"])){
     $_SESSION['eff_add'] = insert_poli($_POST);
     // header("Location: ../views/admins/adminRumahSakit.php");
     header("Location: ../views/admins/adminPoliklinik.php?id_rs=".$_POST['id_rs_hid']);
+}
+
+// chat online
+if(isset($_POST["add_chat"])){
+    $_SESSION['eff_add'] = insert_chat($_POST);
+    header("Location: ../views/pengguna/chatOnline.php");
+}
+
+// forward resep obat
+if(isset($_POST["add_resep"])){
+    $_SESSION['eff_add'] = insert_resep($_POST);
+    header("Location: ../views/pengguna/resepObat.php");
 }
 
 function insert_apotek($data){
@@ -139,6 +157,98 @@ function insert_poli($data){
     $eff_rw = mysqli_affected_rows($conn);
     mysqli_close($conn);
     
+    return $eff_rw;
+}
+
+function insert_rekam_medis($data){
+    global $conn;
+    $insert_stmt = '';
+    $query = '';
+
+    $id_rkm = date("Y").date("m").strval(rand(100,999)).date("H").date("i").date("d");
+    $id_usr = $_SESSION['usr_id_rkm'];
+    $id_rs = $_SESSION['rs_id_rkm'];
+    $id_rsvp = $_SESSION['rsvp_id_rkm'];
+    $keluhn = $data['keluh_patient'];
+    $diagns = $data['diagnose_dr'];
+    $query = "INSERT INTO `rekam_medis` VALUES (?,?,?,?,?,?)";
+
+    $insert_stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($insert_stmt,'iiiiss', $id_rkm, $id_usr, $id_rs, $id_rsvp, $keluhn, $diagns);
+
+    if(!empty($insert_stmt)){
+        mysqli_stmt_execute($insert_stmt);
+    }else{var_dump('gagal');}
+
+    $eff_rw = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    
+    return $eff_rw;
+}
+
+function insert_chat($data){
+    global $conn;
+    $insert_stmt = '';
+    $query = '';
+
+    $id_chat = date("Y").date("i").strval(rand(10,99)).date("H").date("m").strval(rand(10,99)).date("d");
+    $converstn = $data['online_convrst'];
+    $time_chat = date('Y-m-d H:i:s');
+    $id_dok = $_SESSION['dok_id_chat'];
+    $id_usr = $_SESSION['usr_id_chat'];
+    $query = "INSERT INTO `chat_online` VALUES (?,?,?,?,?)";
+
+    $insert_stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($insert_stmt,'issii', $id_chat, $converstn, $time_chat, $id_dok, $id_usr);
+
+    if(!empty($insert_stmt)){
+        mysqli_stmt_execute($insert_stmt);
+    }else{var_dump('gagal');}
+
+    $eff_rw = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    
+    return $eff_rw;
+}
+
+function insert_resep($data){
+    global $conn;
+    $insert_stmt = '';
+    $query = '';
+
+    // resep obat
+    $id_resep = date("Y").date("i").date("H").date("m").date("d").strval(rand(100,999));
+    $id_rekam = $_SESSION['rkm_id_resep'];
+    $obat_usr = $data['obat_pasien'];
+    $query = "INSERT INTO `resep_obat` VALUES (?,?,?)";
+
+    $insert_stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($insert_stmt,'iis', $id_resep, $id_rekam, $obat_usr);
+
+    if(!empty($insert_stmt)){
+        mysqli_stmt_execute($insert_stmt);
+    }else{var_dump('gagal');}
+
+    $eff_rw = mysqli_affected_rows($conn);
+
+    // apotek --resep
+    $id_apotek = $_SESSION['aptk_id_resep'];
+    $time_chat = date('Y-m-d H:i:s');
+    $nama_apotek = $_SESSION['aptk_name_resep'];
+    $alamat_apotek = $_SESSION['aptk_addrs_resep'];
+    $telp_apotek = $_SESSION['aptk_telp_resep'];
+    $query = "INSERT INTO `apotek` VALUES (?,?,?,?,?)";
+
+    $insert_stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($insert_stmt,'isssi', $id_apotek, $nama_apotek, $alamat_apotek, $telp_apotek, $id_resep);
+
+    if(!empty($insert_stmt)){
+        mysqli_stmt_execute($insert_stmt);
+    }else{var_dump('gagal');}
+
+    $eff_rw = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+
     return $eff_rw;
 }
 

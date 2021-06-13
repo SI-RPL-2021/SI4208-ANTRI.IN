@@ -30,9 +30,9 @@ $_SESSION['eff_del_one'] = -1;
 
 <body style="background-color: rgb(181, 240, 181);">
     <!--Navbar-->
-    <div class="container">
-        <div class="d-flex justify-content-between">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="d-flex justify-content-between">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
                 &nbsp;&nbsp;&nbsp;
                 <a class="navbar-brand" href="">
                     <img src="../../storages/gambar/logo.png" width="60" alt="ANTRI.IN">
@@ -48,8 +48,8 @@ $_SESSION['eff_del_one'] = -1;
                 </div>
                 <a href="adminRumahSakit.php" type="button" class="btn btn-danger">Cancel</a>
                 &nbsp;&nbsp;
-            </nav>
-        </div>
+        </nav>
+    </div>
     </div>
     <!--Navbar-->
     <br><br><br><br>

@@ -50,13 +50,14 @@ function insert_reservasi($data){
 
     $id_rsvp = date("Y").date("m").date("d").date("H").date("i").strval(rand(100,999));
     $no_antrian = $_SESSION['line_number'];
+    $stts = 'antri';
     $id_usr = $_SESSION['usr_id_rsvp'];
     $id_dok = $_SESSION['dok_id_rsvp'];
     $id_rs = $_SESSION['rs_id_rsvp'];
-    $query = "INSERT INTO `reservasi` VALUES (?,?,?,?,?)";
+    $query = "INSERT INTO `reservasi` VALUES (?,?,?,?,?,?)";
 
     $insert_stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($insert_stmt,'isiii', $id_rsvp, $no_antrian, $id_usr, $id_dok, $id_rs);
+    mysqli_stmt_bind_param($insert_stmt,'issiii', $id_rsvp, $no_antrian, $stts, $id_usr, $id_dok, $id_rs);
 
     if(!empty($insert_stmt)){
         mysqli_stmt_execute($insert_stmt);
@@ -100,29 +101,36 @@ if (isset($_POST["sign_in"])) {
     $pass = $_POST["kata_sandi"];
     $user_admin = data_views("SELECT * FROM admin WHERE `username` = ?", $username, 's')[0];
     $user_normal = data_views("SELECT * FROM akun WHERE `username` = ?", $username, 's')[0];
+    $user_dokter = data_views("SELECT * FROM dokter_akun WHERE `username` = ?", $username, 's')[0];
     $id_akn_usr = $user_normal['id_akun'];
     $pngg = data_view("SELECT * FROM pengguna WHERE id_akun = ?", $id_akn_usr);
+    $id_akn_dok = $user_dokter['id_akun_dok'];
+    $dktrr = data_view("SELECT * FROM list_dokter WHERE id_akun_dok = ?", $id_akn_dok);
     // $username = $user['username'];
     $user_tp = '';
 
     // var_dump($user_admin);
     // print_r($user_admin);
     // var_dump($user_normal);
-    // var_dump(password_hash('coba_password_disini', PASSWORD_DEFAULT));
     if (!empty($user_admin)) {
         $user_tp = 'admin';
         $user = $user_admin;
     } else if (!empty($user_normal)) {
         $user_tp = 'normal';
         $user = $user_normal;
+    } else if (!empty($user_dokter)) {
+        $user_tp = 'doctor';
+        $user = $user_dokter;
     }
 
     if (password_verify($pass, $user['password'])) {
         $_SESSION['log_uname'] = $username;
         if ($user_tp == "admin") {
             $_SESSION['log_fname'] = $username;
-        } else{
+        } else if ($user_tp == "normal"){
             $_SESSION['log_fname'] = $pngg['nama_lengkap'];
+        } else{
+            $_SESSION['log_fname'] = $dktrr['nama_dokter'];
         }
         $_SESSION['eff_log'] = 1;
 

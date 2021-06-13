@@ -97,6 +97,7 @@ $result = data_views("SELECT * FROM reservasi WHERE id_user = ?", $id_rsvp);
                             <th scope="col">Kode Reservasi</th>
                             </th>
                             <th scope="col">Nomor Antrian</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Dokter</th>
                             <th scope="col">Rumah Sakit</th>
                         </tr>
@@ -112,6 +113,7 @@ $result = data_views("SELECT * FROM reservasi WHERE id_user = ?", $id_rsvp);
                             <tr>
                                 <td><?php echo $item['id_reservasi'] ?></td>
                                 <td><?php echo $item['nomor_antrian'] ?></td>
+                                <td><?php echo $item['status_reserv'] ?></td>
                                 <td><?php echo $dok_rsvp['nama_dokter'] ?></td>
                                 <td>
                                     <?php echo $rs_rsvp['nama_rs'] ?>
