@@ -91,6 +91,7 @@ if (isset($_SESSION['log_uname'])) {
                             <thead>
                                 <tr>
                                     <th scope="col">Nomor</th>
+                                    <th scope="col">Nama Pasien</th>
                                     <th scope="col">Rumah Sakit</th>
                                     <th scope="col">Keluhan</th>
                                     <th scope="col">Diagnosis</th>
@@ -103,9 +104,12 @@ if (isset($_SESSION['log_uname'])) {
                                 foreach ($rkm_medis as $item) {
                                     $id_rs = $item['id_rs'];
                                     $rmh_skt = data_view("SELECT * FROM rumah_sakit WHERE id_rs = ?", $id_rs);
+                                    $id_pasien = $item['id_user'];
+                                    $pasien = data_view("SELECT * FROM pengguna WHERE id_user = ?", $id_pasien);
                                 ?>
                                     <tr>
                                         <td><?php echo $no_dr ?></td>
+                                        <td><?php echo $pasien['nama_lengkap'] ?></td>
                                         <td><?php echo $rmh_skt['nama_rs'] ?></td>
                                         <td><?php echo $item['keluhan'] ?></td>
                                         <td><?php echo $item['diagnosis'] ?></td>
