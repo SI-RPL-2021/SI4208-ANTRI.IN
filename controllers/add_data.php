@@ -54,7 +54,7 @@ if(isset($_POST["add_chat_dok"])){
 // forward resep obat
 if(isset($_POST["add_resep"])){
     $_SESSION['eff_add'] = insert_resep($_POST);
-    header("Location: ../views/pengguna/historiReservasi.php");
+    header("Location: ../views/pengguna/resepObat.php");
 }
 
 function insert_apotek($data){

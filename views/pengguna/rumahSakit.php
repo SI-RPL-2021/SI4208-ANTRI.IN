@@ -28,7 +28,7 @@ $result = view_data("SELECT * FROM rumah_sakit");
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Apotek</a>
+                        <a class="nav-link" href="resepObat.php">Obat Anda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="dokterList.php">Cari Dokter</a>

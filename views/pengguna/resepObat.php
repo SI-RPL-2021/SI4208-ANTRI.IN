@@ -1,5 +1,5 @@
 <?php require '../../controllers/select_data.php';
-$result = view_data("SELECT * FROM apotek");
+$result = view_data("SELECT * FROM resep_obat");
 
 $_SESSION['eff_add'] = -1;
 $_SESSION['eff_edit'] = -1;
@@ -16,49 +16,44 @@ $_SESSION['eff_del_one'] = -1;
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-    <title>Admin | Apotek</title>
+    <!-- Datatable -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
+
+    <title>Data Pembelian Obat Anda</title>
 
     <link rel="icon" href="../../storages/gambar/logo.png" type="image/png" sizes="128x128">
-
-    <!-- Datatable -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
 </head>
 
 <body style="background-color: rgb(181, 240, 181);">
-
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgb(143, 219, 143);">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="adminIndex.php">Dashboard</a>
+                        <a class="nav-link active" aria-current="page" href="">Obat Anda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Apotek</a>
+                        <a class="nav-link" href="dokterList.php">Cari Dokter</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="adminDokter.php">Dokter</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="adminPengguna.php">Pasien</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="adminRumahSakit.php">Rumah Sakit</a>
+                        <a class="nav-link" href="rumahSakit.php">Rumah Sakit</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav d-flex">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Hi, <?= $_SESSION['log_uname'] ?>
+                            Hi, <?= $_SESSION['log_fname'] ?>
                         </a>
 
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">///////\\\\\\\</a></li>
-                            <li><a class="dropdown-item" href="#">\\\\\\\///////</a></li>
+                            <li><a class="dropdown-item" href="editProfile.php">Profile</a></li>
+                            <li><a class="dropdown-item" href="melihatRekamMedis.php">Rekam Medis</a></li>
+                            <li><a class="dropdown-item" href="historiReservasi.php">Reservasi Anda</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -74,9 +69,8 @@ $_SESSION['eff_del_one'] = -1;
 
     <!--Container body-->
     <div class="container pt-5" style="background-color: white;">
-        <br>
-        <a href="" style="text-decoration:none; color:black;">
-            <h1>DATA APOTEK</h1>
+        <br><a href="" style="text-decoration:none; color:black;">
+            <h1>DATA PEMBELIAN OBAT ANDA</h1>
         </a>
 
         <?php
@@ -88,7 +82,7 @@ $_SESSION['eff_del_one'] = -1;
         ?>
 
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                Berhasil mengubah data apotek
+                Berhasil mengubah data pengguna
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php
@@ -97,7 +91,7 @@ $_SESSION['eff_del_one'] = -1;
             $_SESSION['eff_add'] = -1;
         ?>
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                Gagal mengubah data apotek!!!
+                Gagal mengubah data pengguna!!!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php
@@ -107,39 +101,38 @@ $_SESSION['eff_del_one'] = -1;
 
         <div class="card text-dark bg-light my-5" style="max-width: 100%;">
             <div class="card-header">
-                <div class="row justify-content-between ml-2 mr-2">.
-                    <a class="btn btn-success" href="tambahApotek.php">
-                        Tambahkan Apotek baru
-                        <!-- <span class="sr-only">(current)</span> -->
+                <!-- <div class="row justify-content-between ml-2 mr-2">.
+                    <a class="btn btn-success" href="tambahDokter.html">
+                        Tambahkan dokter baru
                     </a>
-                </div>
+                </div> -->
             </div>
             <div class="card-body">
-                <table id="table_aptk" class="table table-hover table-striped table-bordered table-light" style="width:100%">
+                <table id="table_usr" class="table table-hover table-striped table-bordered table-light" style="width:100%">
                     <thead>
                         <tr>
                             <th scope="col">Nomor</th>
-                            <th scope="col">Nama Apotek</th>
-                            <th scope="col">Alamat</th>
-                            <th scope="col">No Telepon</th>
+                            <th scope="col">Rekam Medis</th>
+                            <th scope="col">Nama Obat</th>
+                            <th scope="col">Id Obat</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $no_aptk = 1;
+                        $no_dr = 1;
                         foreach ($result as $item) { ?>
                             <tr>
-                                <td><?php echo $no_aptk ?></td>
-                                <td><?php echo $item['nama_apotek'] ?></td>
-                                <td><?php echo $item['alamat_apotek'] ?></td>
-                                <td><?php echo $item['no_telepon_apotek'] ?></td>
+                                <td><?php echo $no_dr ?></td>
+                                <td><?php echo $item['id_rekam_medis'] ?></td>
+                                <td><?php echo $item['daftar_obat'] ?></td>
+                                <td><?php echo $item['id_resep_obat'] ?></td>
                                 <td>
-                                    <a href="editApotek.php?id_apk=<?= $item['id_apotek'] ?>" type="button" class="btn btn-primary">Edit</a>
-                                    <a href="../../controllers/del_data.php?delptk=<?= $item['id_apotek'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a>
+                                    <!-- <a href="editPengguna.php?id_usr=<?= $item['id_user'] ?>" type="button" class="btn btn-primary">Edit</a>
+                                    <a href="../../controllers/del_data.php?delsr=<?= $item['id_user'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a> -->
                                 </td>
                             </tr>
-                        <?php $no_aptk += 1;
+                        <?php $no_dr += 1;
                         } ?>
                     </tbody>
                 </table>
@@ -148,8 +141,7 @@ $_SESSION['eff_del_one'] = -1;
     </div>
 
     <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
     <!-- Datatable -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -158,7 +150,7 @@ $_SESSION['eff_del_one'] = -1;
 
     <script>
         $(document).ready(function() {
-            $('#table_aptk').DataTable();
+            $('#table_usr').DataTable();
         });
     </script>
 </body>

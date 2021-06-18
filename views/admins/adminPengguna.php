@@ -36,6 +36,9 @@ $_SESSION['eff_del_one'] = -1;
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
+                        <a class="nav-link" href="adminIndex.php">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="adminApotek.php">Apotek</a>
                     </li>
                     <li class="nav-item">
