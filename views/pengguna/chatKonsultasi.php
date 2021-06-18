@@ -72,9 +72,17 @@ $dok_data = data_view("SELECT * FROM list_dokter WHERE id_akun_dok = ?", $id_dok
         </table>
         <?php
         foreach ($chat_data as $cht) {
-        ?>
-            <div class="card bg-dark text-white mb-2 px-5 py-4">
-                <img src="../../storages/gambar/laki.png" alt="Avatar" style="width:50px;height:50px">
+            if ($cht['ownership'] == 'dokter') {
+                $bg_chat = 'bg-dark';
+                $tx_chat = 'text-white';
+                $img_chat = '../../storages/gambar/wanita.png';
+            } else {
+                $bg_chat = 'bg-secondary';
+                $tx_chat = 'text-white';
+                $img_chat = '../../storages/gambar/laki.png';
+            } ?>
+            <div class="card <?= $bg_chat ?> <?= $tx_chat ?> mb-2 px-5 py-4">
+                <img src="<?= $img_chat ?>" alt="Avatar" style="width:50px;height:50px">
                 <p><?= $cht['conversations'] ?></p>
                 <!-- <span class="time-left">11:01</span> -->
                 <small><?= $cht['time_cnvs'] ?></small>
@@ -82,6 +90,7 @@ $dok_data = data_view("SELECT * FROM list_dokter WHERE id_akun_dok = ?", $id_dok
         <?php
         }
         ?>
+
         <div class="row">
             <!-- Form-->
             <form action="../../controllers/add_data.php" method="POST">
@@ -90,6 +99,7 @@ $dok_data = data_view("SELECT * FROM list_dokter WHERE id_akun_dok = ?", $id_dok
                     <textarea class="form-control" id="chatOnlineTextArea" rows="3" name="online_convrst" placeholder="Tuliskan Chat disini"></textarea>
                 </div>
                 <div class="col-md-1 mt-3">
+                    <input type="hidden" class="form-control" id="rtvvvs" name='ownership_chat' value='pengguna'></input>
                     <input type="submit" class="btn btn-primary" value="Kirim" name="add_chat"></input>
                 </div>
             </form>

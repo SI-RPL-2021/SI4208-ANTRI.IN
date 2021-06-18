@@ -200,15 +200,16 @@ function insert_chat($data){
     $insert_stmt = '';
     $query = '';
 
-    $id_chat = date("Y").date("i").strval(rand(10,99)).date("H").date("m").strval(rand(10,99)).date("d");
+    $id_chat = date("Y").date("m").date("d").strval(rand(10,99)).date("H").date("i").strval(rand(10,99));
     $converstn = $data['online_convrst'];
     $time_chat = date('Y-m-d H:i:s');
     $id_dok = $_SESSION['dok_id_chat'];
     $id_usr = $_SESSION['usr_id_chat'];
-    $query = "INSERT INTO `chat_online` VALUES (?,?,?,?,?)";
+    $ownershp = $data['ownership_chat'];;
+    $query = "INSERT INTO `chat_online` VALUES (?,?,?,?,?,?)";
 
     $insert_stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($insert_stmt,'issii', $id_chat, $converstn, $time_chat, $id_dok, $id_usr);
+    mysqli_stmt_bind_param($insert_stmt,'issiis', $id_chat, $converstn, $time_chat, $id_dok, $id_usr, $ownershp);
 
     if(!empty($insert_stmt)){
         mysqli_stmt_execute($insert_stmt);

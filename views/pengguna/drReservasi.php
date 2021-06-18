@@ -118,7 +118,7 @@ if (isset($_SESSION['log_uname'])) {
                                                 <input type="submit" class="btn btn-primary" value="Selesai" name="selesai_btn_r"></input>
                                                 <input type="submit" class="btn btn-warning" value="Resep Obat" name="obat_btn_r"></input>
                                                 <input type="submit" class="btn btn-danger" value="Batal" name="batal_btn_r"></input>
-                                                <input type="hidden" class="form-control" id="rsvvvvv" name='rsvp_edited_id' value=<?= $item['id_reservasi'] ?>>
+                                                <input type="hidden" class="form-control" id="rsvvvvv" name='rsvp_edited_id' value=<?= $item['id_reservasi'] ?>></input>
                                             </form>
                                         </td>
                                     </tr>
