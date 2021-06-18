@@ -5,23 +5,6 @@ $dokter = view_data("SELECT * FROM list_dokter");
 $apotek = view_data("SELECT * FROM apotek");
 $rumah_sakit = view_data("SELECT * FROM rumah_sakit");
 
-$dataPoints1 = array(
-    array("label" => "Rumah Sakit", "y" => count($rumah_sakit)/count($rumah_sakit)+count($apotek)),
-    array("label" => "Apotek", "y" => count($apotek)/count($rumah_sakit)+count($apotek))
-);
-// $dataPoints1 = array( 
-// 	array("label"=>"Chrome", "y"=>64.02),
-// 	array("label"=>"Firefox", "y"=>12.55),
-// 	array("label"=>"IE", "y"=>8.47),
-// 	array("label"=>"Safari", "y"=>6.08),
-// 	array("label"=>"Edge", "y"=>4.29),
-// 	array("label"=>"Others", "y"=>4.59)
-// );
-$dataPoints2 = array(
-    array("label" => "Dokter", "y" => count($dokter)),
-    array("label" => "Pasien", "y" => count($pasien))
-);
-
 $_SESSION['eff_add'] = -1;
 $_SESSION['eff_edit'] = -1;
 $_SESSION['eff_del_one'] = -1;
@@ -172,16 +155,33 @@ $_SESSION['eff_del_one'] = -1;
                 </div>
             </a>
 
+            <script src="https://code.highcharts.com/highcharts.js"></script>
+            <script src="https://code.highcharts.com/modules/exporting.js"></script>
+            <script src="https://code.highcharts.com/modules/export-data.js"></script>
+            <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+            <!-- <figure class="highcharts-figure">
+                <div id="container"></div>
+                <p class="highcharts-description">
+                    .
+                </p>
+            </figure> -->
             <div class="card bg-secondary text-light px-2 py-2" style="background: linear-gradient(to right, #c9d6ff, #e2e2e2);">
-                <!-- <div class="card-body h3 font-weight-bold py-3 text-center"><?= count($dokter) ?></div> -->
-                <div id="chart_div" class="col-md-6 pt-2" style="height: 370px; width: 100%;">
-                </div>
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                    <p class="highcharts-description">
+                        .
+                    </p>
+                </figure>
             </div>
 
             <div class="card bg-secondary text-light px-2 py-2" style="background: linear-gradient(to right, #c9d6ff, #e2e2e2);">
-                <!-- <div class="card-body h3 font-weight-bold py-3 text-center"><?= count($dokter) ?></div> -->
-                <div id="chart_div2" class="col-md-6 pt-2" style="height: 370px; width: 100%;">
-                </div>
+                <figure class="highcharts-figure2">
+                    <div id="container2"></div>
+                    <p class="highcharts-description2">
+                        .
+                    </p>
+                </figure>
             </div>
 
         </div>
@@ -207,43 +207,91 @@ $_SESSION['eff_del_one'] = -1;
     <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
 
     <script>
-        window.onload = function() {
-
-
-            var chart = new CanvasJS.Chart("chart_div", {
-                animationEnabled: true,
-                title: {
-                    text: "Komparasi Rumah Sakit vs Apotek"
-                },
-                subtitles: [{
-                    text: "-"
-                }],
+        Highcharts.chart('container', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Komparasi Rumah Sakit vs Apotek'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
                 data: [{
-                    type: "pie",
-                    yValueFormatString: "#,##0.00\"%\"",
-                    indexLabel: "{label} ({y})",
-                    dataPoints1: <?php echo json_encode($dataPoints1, JSON_NUMERIC_CHECK); ?>
+                    name: 'Rumah Sakit',
+                    y: <?= count($rumah_sakit) ?>,
+                    selected: true,
+                    sliced: true
+                }, {
+                    name: 'Apotek',
+                    y: <?= count($apotek) ?>
                 }]
-            });
-            chart.render();
+            }]
+        });
 
-            var chart2 = new CanvasJS.Chart("chart_div2", {
-                animationEnabled: true,
-                title: {
-                    text: "Komparasi Dokter vs Pasien"
-                },
-                subtitles: [{
-                    text: "-"
-                }],
+        Highcharts.chart('container2', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Komparasi Dokter vs Pasien'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
                 data: [{
-                    type: "pie",
-                    yValueFormatString: "#,##0.00\"%\"",
-                    indexLabel: "{label} ({y})",
-                    dataPoints2: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>
+                    name: 'Dokter',
+                    y: <?= count($dokter) ?>,
+                    selected: true,
+                    sliced: true
+                }, {
+                    name: 'Pasien',
+                    y: <?= count($pasien) ?>
                 }]
-            });
-            chart2.render();
-        }
+            }]
+        });
     </script>
 
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
