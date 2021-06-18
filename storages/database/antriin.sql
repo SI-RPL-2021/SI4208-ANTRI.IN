@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2021 at 05:27 AM
+-- Generation Time: Jun 18, 2021 at 05:02 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -96,6 +96,13 @@ CREATE TABLE `chat_online` (
   `id_dok_chat` bigint(20) NOT NULL,
   `id_akun_chat` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `chat_online`
+--
+
+INSERT INTO `chat_online` (`id_chat`, `conversations`, `time_cnvs`, `id_dok_chat`, `id_akun_chat`) VALUES
+(2021516404068218, 'dok, saya mau bertanya?', '2021-06-18 04:51:00', 6131043867, 4280444697);
 
 -- --------------------------------------------------------
 
@@ -217,7 +224,8 @@ CREATE TABLE `rekam_medis` (
 --
 
 INSERT INTO `rekam_medis` (`id_rekam_medis`, `id_user`, `id_rs`, `id_reservasi`, `keluhan`, `diagnosis`) VALUES
-(202105892075928, 202104280444361, 42820210835905, 20217830528, 'Sakit Hati', 'Kelihatan Depresi');
+(202105892075928, 202104280444361, 42820210835905, 20217830528, 'Sakit Hati', 'Kelihatan Depresi'),
+(202106148022818, 202104280444361, 52820210317903, 202106130341710, 'pusing kepala', 'migrain');
 
 -- --------------------------------------------------------
 
@@ -315,8 +323,8 @@ ALTER TABLE `apotek`
 --
 ALTER TABLE `chat_online`
   ADD PRIMARY KEY (`id_chat`),
-  ADD KEY `fk_id_dok_chat` (`id_dok_chat`),
-  ADD KEY `fk_id_akun_chat` (`id_akun_chat`);
+  ADD KEY `fk_id_akun_chat` (`id_akun_chat`),
+  ADD KEY `fk_id_dok_chat` (`id_dok_chat`);
 
 --
 -- Indexes for table `dokter_akun`
@@ -392,7 +400,7 @@ ALTER TABLE `apotek`
 --
 ALTER TABLE `chat_online`
   ADD CONSTRAINT `fk_id_akun_chat` FOREIGN KEY (`id_akun_chat`) REFERENCES `akun` (`id_akun`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_id_dok_chat` FOREIGN KEY (`id_dok_chat`) REFERENCES `list_dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_id_dok_chat` FOREIGN KEY (`id_dok_chat`) REFERENCES `dokter_akun` (`id_akun_dok`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `list_dokter`
