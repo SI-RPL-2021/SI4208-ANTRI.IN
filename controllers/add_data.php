@@ -11,7 +11,7 @@ if(isset($_POST["daftar_akun"])){
 // isi rekam medis
 if(isset($_POST["add_rekam"])){
     $_SESSION['eff_add'] = insert_rekam_medis($_POST);
-    header("Location: ../views/pengguna/rekamMedis.php");
+    header("Location: ../views/pengguna/melihatRekamMedis.php");
 }
 
 // tambah dokter
@@ -166,9 +166,12 @@ function insert_rekam_medis($data){
     $query = '';
 
     $id_rkm = date("Y").date("m").strval(rand(100,999)).date("H").date("i").date("d");
-    $id_usr = $_SESSION['usr_id_rkm'];
-    $id_rs = $_SESSION['rs_id_rkm'];
-    $id_rsvp = $_SESSION['rsvp_id_rkm'];
+    // $id_usr = $_SESSION['usr_id_rkm'];
+    // $id_rs = $_SESSION['rs_id_rkm'];
+    // $id_rsvp = $_SESSION['rsvp_id_rkm'];
+    $id_usr = $_SESSION['id_no'];
+    $id_rs = $data['rs_id_rkm'];
+    $id_rsvp = $data['rsvp_id_rkm'];
     $keluhn = $data['keluh_patient'];
     $diagns = $data['diagnose_dr'];
     $query = "INSERT INTO `rekam_medis` VALUES (?,?,?,?,?,?)";

@@ -38,6 +38,12 @@ if(isset($_POST["edit_poli"])){
     header("Location: ../views/admins/adminPoliklinik.php?id_rs=".$_POST['id_rs_hid']);
 }
 
+// ubah status reservasi --dr
+if(isset($_GET["id_rsv"]) & isset($_GET["act_rsv"])){
+    $_SESSION['eff_edit'] = update_rsvp($_GET['id_rsv'], $_GET['act_rsv']);
+    header("Location: ../views/pengguna/drReservasi.php");
+}
+
 function update_profile($data, $id_user){
     global $conn;
     // $rs_row = view_data("SELECT * FROM `pengguna` WHERE id_user='$id_user'")[0];
@@ -65,6 +71,39 @@ function update_profile($data, $id_user){
     }else{var_dump('gagal');}
 
     // mysqli_query($conn, $query);
+    $eff_rw = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    
+    return $eff_rw;
+}
+
+function update_rsvp($id_rsvp, $act_rsvp){
+    global $conn;
+    $rs_row = data_view("SELECT * FROM `reservasi` WHERE id_reservasi = ?", $id_rsvp);
+    $update_stmt = '';
+    $query = '';
+
+    $no_antr = $rs_row["nomor_antrian"];
+    if ($act_rsvp == 'selesai_rsv'){
+        $sttts = 'selesai';
+    } else if ($act_rsvp == 'antri_rsv'){
+        $sttts = 'antri';
+    } else {
+        $sttts = 'batal';
+    }
+
+    $id_usr = $rs_row["id_user"];
+    $id_dok = $rs_row["id_dokter"];
+    $id_rs = $rs_row["id_rs"];
+    $query = "UPDATE `reservasi` SET `no_antrian`=?, `status_reserv`=?, `id_user`=?, `id_dokter`=?, `id_rs`=? WHERE `id_reservasi`=?";
+
+    $update_stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($update_stmt,'ssiiii', $no_antr, $sttts, $id_usr, $id_dok, $id_rs, $id_rsvp);
+
+    if(!empty($update_stmt)){
+        mysqli_stmt_execute($update_stmt);
+    }else{var_dump('gagal');}
+
     $eff_rw = mysqli_affected_rows($conn);
     mysqli_close($conn);
     

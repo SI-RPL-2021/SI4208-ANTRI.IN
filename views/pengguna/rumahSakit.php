@@ -45,6 +45,7 @@ $result = view_data("SELECT * FROM rumah_sakit");
 
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="editProfile.php">Profile</a></li>
+                            <li><a class="dropdown-item" href="melihatRekamMedis.php">Rekam Medis</a></li>
                             <li><a class="dropdown-item" href="historiReservasi.php">Reservasi Anda</a></li>
                             <!-- <li><a class="dropdown-item" href="#">
                                     <div class="progress">

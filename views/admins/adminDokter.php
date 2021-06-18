@@ -22,7 +22,6 @@ $_SESSION['eff_del_one'] = -1;
     <link rel="icon" href="../../storages/gambar/logo.png" type="image/png" sizes="128x128">
 
     <!-- Datatable -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
 </head>
 

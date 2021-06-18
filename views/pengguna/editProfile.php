@@ -53,8 +53,8 @@ if (isset($_SESSION['log_uname'])) {
                     &nbsp;&nbsp;
         </nav>
     </div>
-    </div>
-    <!--Navbar-->
+
+    <!--Content-->
     <br><br><br><br>
     <div class="container" style="background-color: white; border-radius: 7px;">
         <?php

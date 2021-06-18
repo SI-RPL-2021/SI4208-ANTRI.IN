@@ -146,8 +146,10 @@ if (isset($_POST["sign_in"])) {
 
         if ($user_tp == "admin") {
             header("Location: ../views/admins/adminRumahSakit.php");
-        } else {
+        } else if ($user_tp == "normal") {
             header("Location: ../views/pengguna/rumahSakit.php");
+        } else {
+            header("Location: ../views/pengguna/drRekamMedis.php");
         }
     } else {
         $_SESSION['eff_log'] = 0;
