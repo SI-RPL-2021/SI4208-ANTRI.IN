@@ -95,11 +95,11 @@ $result = data_views("SELECT * FROM reservasi WHERE id_user = ?", $id_rsvp);
                     <thead>
                         <tr>
                             <th scope="col">Kode Reservasi</th>
-                            </th>
                             <th scope="col">Nomor Antrian</th>
                             <th scope="col">Status</th>
                             <th scope="col">Dokter</th>
                             <th scope="col">Rumah Sakit</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,10 +115,15 @@ $result = data_views("SELECT * FROM reservasi WHERE id_user = ?", $id_rsvp);
                                 <td><?php echo $item['nomor_antrian'] ?></td>
                                 <td><?php echo $item['status_reserv'] ?></td>
                                 <td><?php echo $dok_rsvp['nama_dokter'] ?></td>
+                                <td><?php echo $rs_rsvp['nama_rs'] ?></td>
                                 <td>
-                                    <?php echo $rs_rsvp['nama_rs'] ?>
-                                    <!-- <a href="editPengguna.php?id_usr=<?= $item['id_user'] ?>" type="button" class="btn btn-primary">Edit</a>
-                                    <a href="../../controllers/del_data.php?delsr=<?= $item['id_user'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a> -->
+                                    <?php
+                                    if ($item['status_reserv'] == 'ambil obat') {
+                                    ?>
+                                        <a href="terusanResepObat.php?id_usr=<?= $item['id_user'] ?>" type="button" class="btn btn-info">Obat >></a>
+                                    <?php
+                                    }
+                                    ?>
                                 </td>
                             </tr>
                         <?php

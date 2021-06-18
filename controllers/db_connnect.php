@@ -17,11 +17,14 @@ if (isset($_GET['out_log'])) {
         // unset($_SESSION['eff_del_one']);
         // unset($_SESSION['eff_del_all']);
         // session_destroy();
-        if (isset($_SESSION['usr_id_chat'])){
+        if (isset($_SESSION['usr_id_chat'])) {
             unset($_SESSION['usr_id_chat']);
         }
-        if (isset($_SESSION['dok_id_chat'])){
+        if (isset($_SESSION['dok_id_chat'])) {
             unset($_SESSION['dok_id_chat']);
+        }
+        if (isset($_SESSION['id_no'])) {
+            unset($_SESSION['id_no']);
         }
         header("Location: ../views/login.php");
     }

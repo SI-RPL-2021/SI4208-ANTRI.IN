@@ -14,7 +14,7 @@ if(isset($_POST["add_rekam"])){
     header("Location: ../views/pengguna/melihatRekamMedis.php");
 }
 
-// tambah dokter
+// tambah apotek
 if(isset($_POST["add_apotek"])){
     $_SESSION['eff_add'] = insert_apotek($_POST);
     header("Location: ../views/admins/adminApotek.php");
@@ -48,7 +48,7 @@ if(isset($_POST["add_chat"])){
 // forward resep obat
 if(isset($_POST["add_resep"])){
     $_SESSION['eff_add'] = insert_resep($_POST);
-    header("Location: ../views/pengguna/resepObat.php");
+    header("Location: ../views/pengguna/historiReservasi.php");
 }
 
 function insert_apotek($data){
@@ -221,7 +221,8 @@ function insert_resep($data){
 
     // resep obat
     $id_resep = date("Y").date("i").date("H").date("m").date("d").strval(rand(100,999));
-    $id_rekam = $_SESSION['rkm_id_resep'];
+    // $id_rekam = $_SESSION['rkm_id_resep'];
+    $id_rekam = 202105892075928;
     $obat_usr = $data['obat_pasien'];
     $query = "INSERT INTO `resep_obat` VALUES (?,?,?)";
 

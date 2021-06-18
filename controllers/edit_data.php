@@ -39,8 +39,9 @@ if(isset($_POST["edit_poli"])){
 }
 
 // ubah status reservasi --dr
-if(isset($_GET["id_rsv"]) & isset($_GET["act_rsv"])){
-    $_SESSION['eff_edit'] = update_rsvp($_GET['id_rsv'], $_GET['act_rsv']);
+if(isset($_POST["selesai_btn_r"]) or isset($_POST["obat_btn_r"]) or isset($_POST["batal_btn_r"])){
+    $_SESSION['eff_edit'] = update_rsvp($_POST['rsvp_edited_id']);
+    // var_dump(isset($_POST["selesai_btn_r"]));
     header("Location: ../views/pengguna/drReservasi.php");
 }
 
@@ -77,17 +78,17 @@ function update_profile($data, $id_user){
     return $eff_rw;
 }
 
-function update_rsvp($id_rsvp, $act_rsvp){
+function update_rsvp($id_rsvp){
     global $conn;
     $rs_row = data_view("SELECT * FROM `reservasi` WHERE id_reservasi = ?", $id_rsvp);
     $update_stmt = '';
     $query = '';
 
     $no_antr = $rs_row["nomor_antrian"];
-    if ($act_rsvp == 'selesai_rsv'){
+    if (isset($_POST["selesai_btn_r"])){
         $sttts = 'selesai';
-    } else if ($act_rsvp == 'antri_rsv'){
-        $sttts = 'antri';
+    } else if (isset($_POST["obat_btn_r"])){
+        $sttts = 'ambil obat';
     } else {
         $sttts = 'batal';
     }
@@ -95,7 +96,7 @@ function update_rsvp($id_rsvp, $act_rsvp){
     $id_usr = $rs_row["id_user"];
     $id_dok = $rs_row["id_dokter"];
     $id_rs = $rs_row["id_rs"];
-    $query = "UPDATE `reservasi` SET `no_antrian`=?, `status_reserv`=?, `id_user`=?, `id_dokter`=?, `id_rs`=? WHERE `id_reservasi`=?";
+    $query = "UPDATE `reservasi` SET `nomor_antrian`=?, `status_reserv`=?, `id_user`=?, `id_dokter`=?, `id_rs`=? WHERE `id_reservasi`=?";
 
     $update_stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($update_stmt,'ssiiii', $no_antr, $sttts, $id_usr, $id_dok, $id_rs, $id_rsvp);

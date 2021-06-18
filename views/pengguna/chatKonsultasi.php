@@ -7,7 +7,7 @@ $usr_log = data_view("SELECT * FROM akun WHERE username = ?", $id_uname);
 $dok_log = data_view("SELECT * FROM dokter_akun WHERE username = ?", $id_uname);
 $akun_usr = $usr_log['id_akun'];
 $_SESSION['usr_id_chat'] = $akun_usr;
-$chat_data = chat_views("SELECT * FROM chat_online WHERE id_akun_chat = ? and id_dok_chat = ?", $akun_usr, $id_dok_akun);
+// $chat_data = chat_views("SELECT * FROM chat_online WHERE id_akun_chat = ? and id_dok_chat = ?", $akun_usr, $id_dok_akun);
 // $result2 = data_views("SELECT * FROM chat_online WHERE id_dok_chat = ?", $_GET['id_dok_rsv']);
 // $chat1 = data_views("SELECT * FROM chat_online WHERE id_dok_chat = ?", $id_dok_akun);
 // $chat2 = data_views("SELECT * FROM chat_online WHERE id_dok_chat = ?", $_GET['id_dok_rsv']);

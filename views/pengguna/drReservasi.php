@@ -23,8 +23,7 @@ if (isset($_SESSION['log_uname'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
     <title>Reservasi</title>
 
@@ -38,9 +37,7 @@ if (isset($_SESSION['log_uname'])) {
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgb(143, 219, 143);">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
@@ -57,15 +54,13 @@ if (isset($_SESSION['log_uname'])) {
                 </ul>
                 <ul class="navbar-nav d-flex">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Hi, Dr. <?= $_SESSION['log_fname'] ?>
                         </a>
 
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" href="../../controllers/db_connnect.php?out_log=zft"
-                                    onmouseover="this.style.color='red';" onmouseout="this.style.color='';">Log out</a>
+                                <a class="dropdown-item" href="../../controllers/db_connnect.php?out_log=zft" onmouseover="this.style.color='red';" onmouseout="this.style.color='';">Log out</a>
                             </li>
                         </ul>
                     </li>
@@ -93,14 +88,13 @@ if (isset($_SESSION['log_uname'])) {
                         </div>
                     </div>
                     <div class="card-body">
-                        <table id="table_rsvp_all" class="table table-hover table-striped table-bordered table-light"
-                            style="width:100%">
+                        <table id="table_rsvp_all" class="table table-hover table-striped table-bordered table-light" style="width:100%">
                             <thead>
                                 <tr>
+                                    <th scope="col">--</th>
                                     <th scope="col">Nomor Antrian</th>
                                     <th scope="col">Status Reservasi</th>
                                     <th scope="col">Pasien</th>
-                                    <!-- <th scope="col">Diagnosis</th> -->
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -110,28 +104,24 @@ if (isset($_SESSION['log_uname'])) {
                                 foreach ($rsvp_all as $item) {
                                     $id_ptnt = $item['id_user'];
                                     $ptnt_data = data_view("SELECT * FROM pengguna WHERE id_user = ?", $id_ptnt);
-                                    $sls = 'selesai_rsv';
-                                    $antri = 'antri_rsv';
-                                    $batal = 'batal_rsv';
+                                    // $sls = 'selesai_rsv';
+                                    // $antri = 'antri_rsv';
+                                    // $batal = 'batal_rsv';
                                 ?>
-                                <tr>
-                                    <!-- <td><?php echo $no_dr ?></td> -->
-                                    <td><?php echo $item['nomor_antrian'] ?></td>
-                                    <td><?php echo $item['status_reserv'] ?></td>
-                                    <td><?php echo $ptnt_data['nama_lengkap'] ?></td>
-                                    <td>
-                                        <a href="../../controllers/edit_data.php?id_rsv=<?= $item['id_reservasi'] ?>&act_rsv=<?= $sls ?>"
-                                            role="button" class="btn btn-primary"
-                                            style="pointer-events: none; color: #ccc;">Selesai</a>
-                                        <a href="../../controllers/edit_data.php?id_rsv=<?= $item['id_reservasi'] ?>&act_rsv=<?= $antri ?>"
-                                            role="button" class="btn btn-warning"
-                                            style="pointer-events: none; color: #ccc;">Antri</a>
-                                        <a href="../../controllers/edit_data.php?id_rsv=<?= $item['id_reservasi'] ?>&act_rsv=<?= $batal ?>"
-                                            role="button" class="btn btn-danger"
-                                            style="pointer-events: none; color: #ccc;">Batal</a>
-                                        <!-- <a href="../../controllers/del_data.php?delrkm=<?= $item['id_rekam_medis'] ?>" class="btn btn-danger align-items-center justify-content-center" role="button">Hapus</a> -->
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><?php echo $item['id_reservasi'] ?></td>
+                                        <td><?php echo $item['nomor_antrian'] ?></td>
+                                        <td><?php echo $item['status_reserv'] ?></td>
+                                        <td><?php echo $ptnt_data['nama_lengkap'] ?></td>
+                                        <td>
+                                            <form action="../../controllers/edit_data.php" method="POST">
+                                                <input type="submit" class="btn btn-primary" value="Selesai" name="selesai_btn_r"></input>
+                                                <input type="submit" class="btn btn-warning" value="Resep Obat" name="obat_btn_r"></input>
+                                                <input type="submit" class="btn btn-danger" value="Batal" name="batal_btn_r"></input>
+                                                <input type="hidden" class="form-control" id="rsvvvvv" name='rsvp_edited_id' value=<?= $item['id_reservasi'] ?>>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 <?php $no_dr += 1;
                                 } ?>
                             </tbody>
@@ -143,8 +133,7 @@ if (isset($_SESSION['log_uname'])) {
         </div>
 
         <!-- Bootstrap Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
         </script>
 
         <!-- Datatable -->
@@ -153,9 +142,9 @@ if (isset($_SESSION['log_uname'])) {
         <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
 
         <script>
-        $(document).ready(function() {
-            $('#table_rsvp_all').DataTable();
-        });
+            $(document).ready(function() {
+                $('#table_rsvp_all').DataTable();
+            });
         </script>
 </body>
 
