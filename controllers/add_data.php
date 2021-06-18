@@ -42,7 +42,7 @@ if(isset($_POST["add_poli"])){
 // chat online
 if(isset($_POST["add_chat"])){
     $_SESSION['eff_add'] = insert_chat($_POST);
-    header("Location: ../views/pengguna/chatOnline.php");
+    header("Location: ../views/pengguna/chatKonsultasi.php?id_dok_akun=".$_SESSION['dok_id_chat']);
 }
 
 // forward resep obat

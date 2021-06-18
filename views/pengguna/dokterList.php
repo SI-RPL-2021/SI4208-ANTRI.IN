@@ -47,11 +47,6 @@ $result = view_data("SELECT DISTINCT spesialis FROM list_dokter");
                             <li><a class="dropdown-item" href="editProfile.php">Profile</a></li>
                             <li><a class="dropdown-item" href="melihatRekamMedis.php">Rekam Medis</a></li>
                             <li><a class="dropdown-item" href="historiReservasi.php">Reservasi Anda</a></li>
-                            <!-- <li><a class="dropdown-item" href="#">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </a></li> -->
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

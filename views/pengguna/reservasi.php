@@ -2,6 +2,9 @@
 $id_rsv = $_GET['id_dok_rsv'];
 $usr_rsv = $_SESSION['log_uname'];
 $rsv_res = data_view("SELECT * FROM list_dokter WHERE id_dokter = ?", $id_rsv);
+$id_akun_dok = $rsv_res['id_akun_dok'];
+$dok_akn = data_view("SELECT * FROM dokter_akun WHERE id_akun_dok = ?", $id_akun_dok);
+
 $rsv_usr = data_view("SELECT * FROM akun WHERE username = ?", $usr_rsv);
 $id_akun_rsv = $rsv_usr['id_akun'];
 $rsv_usr = data_view("SELECT * FROM pengguna WHERE id_akun = ?", $id_akun_rsv);
@@ -28,7 +31,6 @@ $hsp_rsv = data_view("SELECT * FROM rumah_sakit WHERE id_rs = ?", $rs_poli);
 </head>
 
 <body style="background-color: rgb(181, 240, 181);">
-
     <!--Navbar-->
     <div class="d-flex justify-content-between">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -37,8 +39,15 @@ $hsp_rsv = data_view("SELECT * FROM rumah_sakit WHERE id_rs = ?", $rs_poli);
                 <a class="navbar-brand" href="">
                     <img src="../../storages/gambar/logo.png" width="60" alt="">
                 </a>
-                <div class="collapse navbar-collapse nav justify-content-center" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="chatKonsultasi.php?id_dok_akun=<?= $id_akun_dok ?>">
+                                <h4>Chat</h4>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
                             <a class="nav-link active" aria-current="page" href="">
                                 <h4>Reservasi Dokter</h4>
@@ -50,7 +59,6 @@ $hsp_rsv = data_view("SELECT * FROM rumah_sakit WHERE id_rs = ?", $rs_poli);
                 &nbsp;&nbsp;
 
         </nav>
-    </div>
     </div>
 
     <!--Container body-->

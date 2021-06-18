@@ -42,6 +42,21 @@ function data_views($query, $id_data, $type_bnd='i'){
     return $rows;
 }
 
+function chat_views($query, $id_dok_akn, $id_usr_akn, $type_bnd='ii'){
+    global $conn;
+
+    $statementt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($statementt, $type_bnd, $id_usr_akn, $id_dok_akn);
+    mysqli_stmt_execute($statementt);
+    $reslt = mysqli_stmt_get_result($statementt);
+    
+    while($row = mysqli_fetch_assoc($reslt))
+    {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
 function insert_reservasi($data){
     global $conn;
     // $rs_row = view_data("SELECT * FROM `list_dokter`");
