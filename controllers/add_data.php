@@ -45,6 +45,12 @@ if(isset($_POST["add_chat"])){
     header("Location: ../views/pengguna/chatKonsultasi.php?id_dok_akun=".$_SESSION['dok_id_chat']);
 }
 
+// chat online
+if(isset($_POST["add_chat_dok"])){
+    $_SESSION['eff_add'] = insert_chat($_POST);
+    header("Location: ../views/pengguna/drChat.php");
+}
+
 // forward resep obat
 if(isset($_POST["add_resep"])){
     $_SESSION['eff_add'] = insert_resep($_POST);
