@@ -1,4 +1,4 @@
-##### SI4208-ANTRI.IN &copy; 2021 - https://antri-in.herokuapp.com/
+##### SI4208-ANTRI.IN &copy; 2021
 
 # Hi, Selamat Datang bagi Kalian semua :wave:
 
